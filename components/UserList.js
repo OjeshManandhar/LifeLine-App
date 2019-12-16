@@ -41,7 +41,7 @@ export default class UserList extends React.Component {
   render() {
     return (
       <View>
-        <Text>Hello</Text>
+        <Text>Map</Text>
       </View>
     );
   }
