@@ -9,6 +9,7 @@ import {
   ScrollView,
 } from 'react-native';
 import Button from '../components/Button';
+import SignupPage from '../components/SignupPage';
 
 let scrollXPos = 0;
 
@@ -17,6 +18,7 @@ export default class Signup extends Component {
     super(props);
     this.state = {
       name: '',
+      text1: 'Lets get started...',
       id: '',
       hospital: '',
       height: Dimensions.get('window').height,
@@ -46,6 +48,8 @@ export default class Signup extends Component {
         ref={scroller => {
           this.scroller = scroller;
         }}>
+        {/* <SignupPage text1={this.state.text1} /> */}
+
         <View style={styles.page}>
           <View style={styles.header}>
             <Text style={styles.headerText}>Create an Account</Text>
@@ -63,7 +67,7 @@ export default class Signup extends Component {
                 style={styles.holder}
                 autoCapitalize="none"
                 keyboardType="email-address"
-                value={this.state.email}
+                value={this.state.name}
               />
             </View>
             <Button onPress={this.scrollToB}>Next</Button>
