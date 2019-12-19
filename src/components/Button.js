@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     borderColor: '#FF3A3A',
   },
   textStyle: {
-    fontSize: 20,
+    fontSize: 15,
     color: '#fff',
   },
 });
