@@ -9,35 +9,44 @@ import {
 } from 'react-native';
 import Button from './Button';
 
-export default class SignupPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      id: '',
-      hospital: '',
-    };
-  }
+export default class Form extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     name: '',
+  //     id: '',
+  //     hospital: '',
+  //   };
+  // }
   render() {
-    console.log(this.props.text1);
     return (
       <View style={styles.page}>
         <View style={styles.header}>
           <Text style={styles.headerText}>Create an Account</Text>
         </View>
-        <Text style={styles.text}>{this.props.text1}</Text>
+        <Text style={styles.text}>{this.props.title}</Text>
         <View style={styles.body}>
-          <Image style={styles.image} source={require('../assets/logo.png')} />
-          <Text style={styles.text}>Please give us your Text2</Text>
+          <Image style={styles.image} source={require('../assets/dummy.png')} />
+          <Text style={styles.text}>
+            Please give us your {this.props.text2}
+          </Text>
           <View style={styles.textInput}>
             <TextInput
-              placeholder="text3"
+              placeholder={this.props.placeholder}
               style={styles.holder}
               autoCapitalize="none"
               value={this.props.children}
             />
           </View>
-          <Button onPress={this.props.scrollToB}>Next</Button>
+          <Button onPress={this.props.scroll}>Next</Button>
+          {/* <View style={styles.pagination}>
+            <View style={styles.circle} />
+            <View style={styles.circle} />
+            <View style={styles.circle} />
+            <View style={styles.circle} />
+            <View style={styles.circle} />
+            <View style={styles.circle} />
+          </View> */}
         </View>
       </View>
     );
@@ -77,8 +86,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    height: 180,
+    height: 200,
     width: 200,
+    resizeMode: 'cover',
   },
   textInput: {
     marginTop: 5,
@@ -94,4 +104,16 @@ const styles = StyleSheet.create({
     width: 280,
     padding: 10,
   },
+  // pagination: {
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-around',
+  // },
+  // circle: {
+  //   width: 10,
+  //   height: 10,
+  //   borderRadius: 10 / 2,
+  //   backgroundColor: 'grey',
+  //   marginLeft: 20,
+  //   marginTop: 40,
+  // },
 });
