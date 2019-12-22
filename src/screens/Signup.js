@@ -22,26 +22,26 @@ export default class Signup extends Component {
         placeholder: 'Driver ID',
         text2: 'driver ID.',
       },
+      // {
+      //   id: 3,
+      //   text1: 'Which Hospital do you work for?',
+      //   placeholder: 'Patan Hospital',
+      //   text2: 'hospital name.',
+      // },
       {
         id: 3,
-        text1: 'Which Hospital do you work for?',
-        placeholder: 'Patan Hospital',
-        text2: 'hospital name.',
-      },
-      {
-        id: 4,
         text1: 'Great, We need a few more information.',
         placeholder: 'abc@mail.com',
         text2: 'email.',
       },
       {
-        id: 5,
+        id: 4,
         text1: 'Almost there ...',
         placeholder: '98********',
         text2: 'contact.',
       },
       {
-        id: 6,
+        id: 5,
         text1: 'Now, for the final step!!',
         placeholder: 'Password',
         text2: 'password.',
@@ -50,7 +50,7 @@ export default class Signup extends Component {
   };
 
   scrollTo = () => {
-    if (this.state.count < 6) {
+    if (this.state.count < 5) {
       scrollXPos = Width * this.state.count;
       this.scroller.scrollTo({x: scrollXPos, y: 0});
       this.setState({count: this.state.count + 1});
@@ -61,19 +61,19 @@ export default class Signup extends Component {
   };
 
   render() {
-    console.log(this.state.text1);
     return (
       <ScrollView
         horizontal={true}
         pagingEnabled={true}
-        // showsHorizontalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
         style={styles.container}
         ref={scroller => {
           this.scroller = scroller;
         }}>
         {this.state.data.map(c => (
           <Form
-            key={c.placeholder}
+            key={c.id}
+            id={c.id}
             title={c.text1}
             placeholder={c.placeholder}
             text2={c.text2}

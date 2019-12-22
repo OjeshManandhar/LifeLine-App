@@ -9,7 +9,6 @@ import {
   ImageBackground,
   Dimensions,
 } from 'react-native';
-// import axios from 'axios';
 import Button from '../components/Button';
 
 export default class Login extends Component {
@@ -66,7 +65,7 @@ export default class Login extends Component {
             <View style={styles.fotter}>
               <Text style={styles.text}>Don't have an account? </Text>
               <TouchableOpacity>
-                <Text style={styles.text && {color: '#FF3A3A'}}>Sign Up</Text>
+                <Text style={[styles.text, styles.link]}>Sign Up</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -90,7 +89,7 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: -10,
+    marginTop: -25,
   },
   content: {
     flex: 3,
@@ -136,5 +135,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
+  },
+  link: {
+    color: '#FF3A3A',
   },
 });
