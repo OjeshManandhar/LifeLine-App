@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 10 / 2,
-    marginLeft: 20,
+    margin: 18,
     marginTop: 40,
   },
   circleG: {
