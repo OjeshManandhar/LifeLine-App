@@ -15,6 +15,7 @@
     "react-native": "0.61.5",
     "react-native-gesture-handler": "^1.5.2",
     "react-native-keyboard-aware-scroll-view": "^0.9.1",
+    "react-navigation": "^4.0.10",
     "react-navigation-stack": "^1.10.3"
   },
   "devDependencies": {

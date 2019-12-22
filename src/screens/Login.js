@@ -22,6 +22,7 @@ export default class Login extends Component {
   }
 
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
         <ImageBackground
@@ -60,12 +61,16 @@ export default class Login extends Component {
               />
             </View>
             <View style={styles.button}>
-              <Button>Log In</Button>
+              <Button onPress={() => navigate('Home')}>Log In</Button>
             </View>
             <View style={styles.fotter}>
               <Text style={styles.text}>Don't have an account? </Text>
               <TouchableOpacity>
-                <Text style={[styles.text, styles.link]}>Sign Up</Text>
+                <Text
+                  style={[styles.text, styles.link]}
+                  onPress={() => navigate('Signup')}>
+                  Sign Up
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
