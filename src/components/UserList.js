@@ -2,48 +2,71 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import axios from 'axios';
 
+var session_url = 'http://127.0.0.1:5000/signup';
 axios
-  .post('http://192.168.1.16:5000/signup', {
-    // data to be sent
-    name: 'swiks',
-    email: 'swiks@gmail.com',
-    job: 'driver',
-    password: 'keyboard',
+  .post(
+    session_url,
+    {
+      name: 'test2',
+      email: 'test2@gmail.com',
+      job: 'driver',
+      driver_id: '0AE376Z2',
+      contact: 9808998164,
+      password: 'major2',
+    },
+    // {
+    //   auth: {
+    //     name: uname,
+    //     password: pass,
+    //   },
+    // },
+  )
+  .then(function(response) {
+    console.log(response.data);
   })
-  .then(response => {
-    if (response.data.status) {
-      console.log(response);
-    }
-  })
-  .catch(error => {
+  .catch(function(error) {
     console.log(error);
   });
 
-export default class UserList extends React.Component {
-  state = {
-    datas: [],
-  };
+// axios
+//   .post('http://127.0.0.1:5000/signup', {
+//     // data to be sent
+//     name: 'test2',
+//     email: 'test2@gmail.com',
+//     job: 'driver',
+//     driver_id: '0AE376Z2',
+//     contact: 9808998164,
+//     password: 'major2',
+//   })
+//   .then(response => {
+//     if (response.data.status) {
+//       console.log(response);
+//     }
+//   })
+//   .catch(error => {
+//     console.log(error);
+//   });
 
-  // componentDidMount() {
-  //   axios.get('http://192.168.1.16:5000/user').then(res => {
-  //     this.setState({datas: res.data});
-  //     console.log(this.state.datas);
-  //   });
-  //}
-  // handleRetrive = () => {
-  //   const {datas} = this.state;
-  //   return (
-  //     for(var i =0; i < datas.length; i++) {
-  //       <View>
-  //       </View>
-  //     }
-  //   );
+// axios.get('http://127.0.0.1:5000/user').then(response => {
+//   console.log(response.data);
+//   console.log(response.status);
+//   console.log(response.statusText);
+//   console.log(response.headers);
+//   console.log(response.config);
+// });
+
+export default class UserList extends React.Component {
+  // state = {
+  //   datas: [],
   // };
+  // componentDidMount() {
+  //   axios.get('http://127.0.0.1:5000/user').then(res => {
+  //     console.log(res);
+  //     this.setState({datas: res.data});
+  //   });
+  // }
+
   render() {
-    return (
-      <View>
-        <Text>Map</Text>
-      </View>
-    );
+    return <Text>Hello</Text>;
   }
 }

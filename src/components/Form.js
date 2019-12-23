@@ -8,22 +8,24 @@ import {
   TextInput,
 } from 'react-native';
 import Button from './Button';
+import Pagination from './Pagination';
 
 export default class Form extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     name: '',
-  //     id: '',
-  //     hospital: '',
-  //   };
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      contact: '',
+      driverid: '',
+      username: '',
+      errorMessage: null,
+    };
+  }
+
   render() {
     return (
-      <View style={styles.page}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Create an Account</Text>
-        </View>
+      <View style={styles.container}>
         <Text style={styles.text}>{this.props.title}</Text>
         <View style={styles.body}>
           <Image style={styles.image} source={require('../assets/dummy.png')} />
@@ -35,18 +37,11 @@ export default class Form extends Component {
               placeholder={this.props.placeholder}
               style={styles.holder}
               autoCapitalize="none"
-              value={this.props.children}
+              value={this.state.value}
             />
           </View>
           <Button onPress={this.props.scroll}>Next</Button>
-          {/* <View style={styles.pagination}>
-            <View style={styles.circle} />
-            <View style={styles.circle} />
-            <View style={styles.circle} />
-            <View style={styles.circle} />
-            <View style={styles.circle} />
-            <View style={styles.circle} />
-          </View> */}
+          <Pagination id={this.props.id} />
         </View>
       </View>
     );
@@ -58,24 +53,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
-  },
-  page: {
-    flexDirection: 'column',
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
-    //justifyContent: 'center',
-  },
-  header: {
-    width: '100%',
-    height: '13%',
-    backgroundColor: '#F53D3D',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-  },
-  headerText: {
-    color: 'white',
-    fontSize: 25,
-    marginLeft: 20,
   },
   text: {
     color: '#707070',
@@ -104,16 +81,4 @@ const styles = StyleSheet.create({
     width: 280,
     padding: 10,
   },
-  // pagination: {
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-around',
-  // },
-  // circle: {
-  //   width: 10,
-  //   height: 10,
-  //   borderRadius: 10 / 2,
-  //   backgroundColor: 'grey',
-  //   marginLeft: 20,
-  //   marginTop: 40,
-  // },
 });

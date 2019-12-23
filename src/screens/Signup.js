@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Dimensions, ScrollView} from 'react-native';
+import {StyleSheet, Dimensions, ScrollView, View, Text} from 'react-native';
 import Form from '../components/Form';
 
 let scrollXPos = 0;
@@ -24,24 +24,18 @@ export default class Signup extends Component {
       },
       {
         id: 3,
-        text1: 'Which Hospital do you work for?',
-        placeholder: 'Patan Hospital',
-        text2: 'hospital name.',
-      },
-      {
-        id: 4,
         text1: 'Great, We need a few more information.',
         placeholder: 'abc@mail.com',
         text2: 'email.',
       },
       {
-        id: 5,
+        id: 4,
         text1: 'Almost there ...',
         placeholder: '98********',
         text2: 'contact.',
       },
       {
-        id: 6,
+        id: 5,
         text1: 'Now, for the final step!!',
         placeholder: 'Password',
         text2: 'password.',
@@ -50,7 +44,7 @@ export default class Signup extends Component {
   };
 
   scrollTo = () => {
-    if (this.state.count < 6) {
+    if (this.state.count < 5) {
       scrollXPos = Width * this.state.count;
       this.scroller.scrollTo({x: scrollXPos, y: 0});
       this.setState({count: this.state.count + 1});
@@ -61,26 +55,31 @@ export default class Signup extends Component {
   };
 
   render() {
-    console.log(this.state.text1);
     return (
-      <ScrollView
-        horizontal={true}
-        pagingEnabled={true}
-        // showsHorizontalScrollIndicator={false}
-        style={styles.container}
-        ref={scroller => {
-          this.scroller = scroller;
-        }}>
-        {this.state.data.map(c => (
-          <Form
-            key={c.placeholder}
-            title={c.text1}
-            placeholder={c.placeholder}
-            text2={c.text2}
-            scroll={this.scrollTo}
-          />
-        ))}
-      </ScrollView>
+      <View style={styles.page}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Create an Account</Text>
+        </View>
+        <ScrollView
+          horizontal={true}
+          pagingEnabled={true}
+          showsHorizontalScrollIndicator={false}
+          style={styles.container}
+          ref={scroller => {
+            this.scroller = scroller;
+          }}>
+          {this.state.data.map(c => (
+            <Form
+              key={c.id}
+              id={c.id}
+              title={c.text1}
+              placeholder={c.placeholder}
+              text2={c.text2}
+              scroll={this.scrollTo}
+            />
+          ))}
+        </ScrollView>
+      </View>
     );
   }
 }
@@ -90,5 +89,23 @@ const styles = StyleSheet.create({
     flex: 1,
     width: Width,
     height: Height,
+  },
+  page: {
+    flexDirection: 'column',
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width,
+    //justifyContent: 'center',
+  },
+  header: {
+    width: '100%',
+    height: '13%',
+    backgroundColor: '#F53D3D',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+  headerText: {
+    color: 'white',
+    fontSize: 25,
+    marginLeft: 20,
   },
 });
