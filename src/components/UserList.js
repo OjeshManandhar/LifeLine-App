@@ -2,27 +2,34 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import axios from 'axios';
 
-// const API = 'http://192.168.1.125:5000/login';
-// fetch(API, {
-//   method: 'GET',
-// })
-//   .then(res => {
-//     res.json();
-//   })
-//   .then(data => {
-//     console.log(data);
-//   });
+var session_url = 'http://127.0.0.1:5000/signup';
+axios
+  .post(
+    session_url,
+    {
+      name: 'test2',
+      email: 'test2@gmail.com',
+      job: 'driver',
+      driver_id: '0AE376Z2',
+      contact: 9808998164,
+      password: 'major2',
+    },
+    // {
+    //   auth: {
+    //     name: uname,
+    //     password: pass,
+    //   },
+    // },
+  )
+  .then(function(response) {
+    console.log(response.data);
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
 
 // axios
-//   .get('http://192.168.1.125:5000/login', {
-//     auth: {name: 'test2', password: 'major2'},
-//   })
-//   .then(res => {
-//     console.log(res.data);
-//   });
-
-// axios
-//   .post('http://192.168.1.125:5000/signup', {
+//   .post('http://127.0.0.1:5000/signup', {
 //     // data to be sent
 //     name: 'test2',
 //     email: 'test2@gmail.com',
@@ -40,45 +47,26 @@ import axios from 'axios';
 //     console.log(error);
 //   });
 
-async function getData() {
-  await axios
-    .get('https://example.com', {
-      auth: {
-        user: 'username',
-        password: 'password',
-      },
-    })
-    .then(res => {
-      console.log(res.data.status);
-    });
-}
+// axios.get('http://127.0.0.1:5000/user').then(response => {
+//   console.log(response.data);
+//   console.log(response.status);
+//   console.log(response.statusText);
+//   console.log(response.headers);
+//   console.log(response.config);
+// });
 
 export default class UserList extends React.Component {
-  state = {
-    datas: [],
-  };
-
+  // state = {
+  //   datas: [],
+  // };
   // componentDidMount() {
-  //   axios.get('http://192.168.1.125:5000/user').then(res => {
+  //   axios.get('http://127.0.0.1:5000/user').then(res => {
+  //     console.log(res);
   //     this.setState({datas: res.data});
-  //     console.log(this.state.datas);
   //   });
   // }
-  // handleRetrive = () => {
-  //   const {datas} = this.state;
-  //   return (
-  //     for(var i =0; i < datas.length; i++) {
-  //       <View>
-  //       </View>
-  //     }
-  //   );
-  // };
+
   render() {
-    console.log(getData());
-    return (
-      <View>
-        <Text>Map</Text>
-      </View>
-    );
+    return <Text>Hello</Text>;
   }
 }

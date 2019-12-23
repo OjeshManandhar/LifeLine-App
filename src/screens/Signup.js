@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Dimensions, ScrollView} from 'react-native';
+import {StyleSheet, Dimensions, ScrollView, View, Text} from 'react-native';
 import Form from '../components/Form';
 
 let scrollXPos = 0;
@@ -22,12 +22,6 @@ export default class Signup extends Component {
         placeholder: 'Driver ID',
         text2: 'driver ID.',
       },
-      // {
-      //   id: 3,
-      //   text1: 'Which Hospital do you work for?',
-      //   placeholder: 'Patan Hospital',
-      //   text2: 'hospital name.',
-      // },
       {
         id: 3,
         text1: 'Great, We need a few more information.',
@@ -62,25 +56,30 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <ScrollView
-        horizontal={true}
-        pagingEnabled={true}
-        showsHorizontalScrollIndicator={false}
-        style={styles.container}
-        ref={scroller => {
-          this.scroller = scroller;
-        }}>
-        {this.state.data.map(c => (
-          <Form
-            key={c.id}
-            id={c.id}
-            title={c.text1}
-            placeholder={c.placeholder}
-            text2={c.text2}
-            scroll={this.scrollTo}
-          />
-        ))}
-      </ScrollView>
+      <View style={styles.page}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Create an Account</Text>
+        </View>
+        <ScrollView
+          horizontal={true}
+          pagingEnabled={true}
+          showsHorizontalScrollIndicator={false}
+          style={styles.container}
+          ref={scroller => {
+            this.scroller = scroller;
+          }}>
+          {this.state.data.map(c => (
+            <Form
+              key={c.id}
+              id={c.id}
+              title={c.text1}
+              placeholder={c.placeholder}
+              text2={c.text2}
+              scroll={this.scrollTo}
+            />
+          ))}
+        </ScrollView>
+      </View>
     );
   }
 }
@@ -90,5 +89,23 @@ const styles = StyleSheet.create({
     flex: 1,
     width: Width,
     height: Height,
+  },
+  page: {
+    flexDirection: 'column',
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width,
+    //justifyContent: 'center',
+  },
+  header: {
+    width: '100%',
+    height: '13%',
+    backgroundColor: '#F53D3D',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+  headerText: {
+    color: 'white',
+    fontSize: 25,
+    marginLeft: 20,
   },
 });
