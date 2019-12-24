@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
-import {StyleSheet, Dimensions, ScrollView, View, Text} from 'react-native';
+import {
+  StyleSheet,
+  Dimensions,
+  ScrollView,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import Form from '../components/Form';
 
 let scrollXPos = 0;
@@ -55,9 +63,16 @@ export default class Signup extends Component {
   };
 
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.page}>
         <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigate('Login')}>
+            <Image
+              style={styles.icon}
+              source={require('../assets/back_icon.png')}
+            />
+          </TouchableOpacity>
           <Text style={styles.headerText}>Create an Account</Text>
         </View>
         <ScrollView
@@ -99,13 +114,19 @@ const styles = StyleSheet.create({
   header: {
     width: '100%',
     height: '13%',
+    flexDirection: 'row',
     backgroundColor: '#F53D3D',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingLeft: 20,
   },
   headerText: {
     color: 'white',
     fontSize: 25,
     marginLeft: 20,
+  },
+  icon: {
+    height: 30,
+    width: 30,
   },
 });
