@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {Text} from 'react-native';
 import axios from 'axios';
 
 // axios.get('http://192.168.1.119:5000/user').then(res => {

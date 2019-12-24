@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Dimensions,
@@ -9,13 +9,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Form from '../components/Form';
+import {Actions} from 'react-native-router-flux';
 
 let scrollXPos = 0;
 let Width = Dimensions.get('window').width;
 let Height = Dimensions.get('window').height;
 
-export default class Signup extends Component {
-  state = {
+const Signup = props => {
+  const [state, setState] = useState({
     count: 1,
     data: [
       {
@@ -49,55 +50,54 @@ export default class Signup extends Component {
         text2: 'password.',
       },
     ],
-  };
+  });
 
-  scrollTo = () => {
-    if (this.state.count < 5) {
-      scrollXPos = Width * this.state.count;
+  const scrollTo = () => {
+    if (state.count < 5) {
+      scrollXPos = Width * state.count;
       this.scroller.scrollTo({x: scrollXPos, y: 0});
-      this.setState({count: this.state.count + 1});
+      setState({count: state.count + 1});
     } else {
       this.scroller.scrollTo({x: 0, y: 0});
-      this.setState({count: 1});
+      setState({count: 1});
     }
   };
 
-  render() {
-    const {navigate} = this.props.navigation;
-    return (
-      <View style={styles.page}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigate('Login')}>
-            <Image
-              style={styles.icon}
-              source={require('../assets/back_icon.png')}
-            />
-          </TouchableOpacity>
-          <Text style={styles.headerText}>Create an Account</Text>
-        </View>
-        <ScrollView
-          horizontal={true}
-          pagingEnabled={true}
-          showsHorizontalScrollIndicator={false}
-          style={styles.container}
-          ref={scroller => {
-            this.scroller = scroller;
-          }}>
-          {this.state.data.map(c => (
-            <Form
-              key={c.id}
-              id={c.id}
-              title={c.text1}
-              placeholder={c.placeholder}
-              text2={c.text2}
-              scroll={this.scrollTo}
-            />
-          ))}
-        </ScrollView>
+  return (
+    <View style={styles.page}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={Actions.login}>
+          <Image
+            style={styles.icon}
+            source={require('../assets/back_icon.png')}
+          />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>Create an Account</Text>
       </View>
-    );
-  }
-}
+      <ScrollView
+        horizontal={true}
+        pagingEnabled={true}
+        showsHorizontalScrollIndicator={false}
+        style={styles.container}
+        ref={scroller => {
+          this.scroller = scroller;
+        }}>
+        {state.data.map((c, index) => (
+          <Form
+            key={c.id}
+            id={c.id}
+            title={c.text1}
+            placeholder={c.placeholder}
+            text2={c.text2}
+            scroll={scrollTo}
+          />
+        ))}
+      </ScrollView>
+    </View>
+  );
+};
+
+export default Signup;
 
 const styles = StyleSheet.create({
   container: {
