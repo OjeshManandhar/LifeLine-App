@@ -11,13 +11,18 @@ import {
 import Form from '../components/Form';
 import {Actions} from 'react-native-router-flux';
 
-let scrollXPos = 0;
+// let scrollXPos = 0;
 let Width = Dimensions.get('window').width;
 let Height = Dimensions.get('window').height;
 
 const Signup = props => {
   const [state, setState] = useState({
     count: 1,
+    email: '',
+    password: '',
+    name: '',
+    contact: '',
+    driver_id: '',
     data: [
       {
         id: 1,
@@ -52,16 +57,21 @@ const Signup = props => {
     ],
   });
 
-  const scrollTo = () => {
-    if (state.count < 5) {
-      scrollXPos = Width * state.count;
-      this.scroller.scrollTo({x: scrollXPos, y: 0});
-      setState({count: state.count + 1});
-    } else {
-      this.scroller.scrollTo({x: 0, y: 0});
-      setState({count: 1});
-    }
+  const handleInput = e => {
+    setState({name: e});
   };
+  // const scroller = useRef(null);
+
+  // const scroll = () => {
+  //   if (state.count < 5) {
+  //     scrollXPos = Width * state.count;
+  //     scroller.scrollTo({x: scrollXPos, y: 0});
+  //     setState({count: state.count + 1});
+  //   } else {
+  //     scroller.scrollTo({x: 0, y: 0});
+  //     setState({count: 1});
+  //   }
+  // };
 
   return (
     <View style={styles.page}>
@@ -78,10 +88,7 @@ const Signup = props => {
         horizontal={true}
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
-        style={styles.container}
-        ref={scroller => {
-          this.scroller = scroller;
-        }}>
+        style={styles.container}>
         {state.data.map((c, index) => (
           <Form
             key={c.id}
@@ -89,7 +96,9 @@ const Signup = props => {
             title={c.text1}
             placeholder={c.placeholder}
             text2={c.text2}
-            scroll={scrollTo}
+            value={c.name}
+            input={handleInput}
+            // scroll={scroll}
           />
         ))}
       </ScrollView>

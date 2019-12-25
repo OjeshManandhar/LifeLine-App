@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -11,14 +11,45 @@ import Button from './Button';
 import Pagination from './Pagination';
 
 const Form = props => {
-  // const [state, setState] = useState({
-  //   email: '',
-  //   password: '',
-  //   contact: '',
-  //   driverid: '',
-  //   username: '',
-  //   errorMessage: null,
-  // });
+  const [state, setState] = useState({
+    email: '',
+    password: '',
+    name: '',
+    contact: '',
+    driver_id: '',
+  });
+  const handleValue = () => {
+    if (props.id === 1) {
+      state.name;
+    } else if (props.id === 2) {
+      state.driver_id;
+    } else if (props.id === 3) {
+      state.email;
+    } else if (props.id === 4) {
+      state.contact;
+    } else {
+      state.password;
+    }
+  };
+
+  const handleEvent = e => {
+    if (props.id === 1) {
+      setState({name: e.nativeEvent.text});
+    } else if (props.id === 2) {
+      setState({driver_id: e.nativeEvent.text});
+    } else if (props.id === 3) {
+      setState({email: e.nativeEvent.text});
+    } else if (props.id === 4) {
+      setState({contact: e.nativeEvent.text});
+    } else {
+      setState({pasword: e.nativeEvent.text});
+    }
+  };
+
+  // const handleSubmit = e => {
+  //   e.preventDefault();
+  //   console.log(state.name);
+  // };
 
   return (
     <View style={styles.container}>
@@ -31,9 +62,11 @@ const Form = props => {
             placeholder={props.placeholder}
             style={styles.holder}
             autoCapitalize="none"
+            value={handleValue}
+            onChange={handleEvent}
           />
         </View>
-        <Button onPress={props.scroll}>Next</Button>
+        <Button onPress={console.log(state)}>Next</Button>
         <Pagination id={props.id} />
       </View>
     </View>
