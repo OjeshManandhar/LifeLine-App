@@ -17,7 +17,7 @@ let Height = Dimensions.get('window').height;
 
 const Signup = props => {
   const [state, setState] = useState({
-    count: 1,
+    count: 0,
     data: [
       {
         id: 1,
@@ -64,6 +64,13 @@ const Signup = props => {
   //   }
   // };
 
+  const handleScroll = () => {
+    setState({count: state.count + 1});
+    if (state.count === 5) {
+      setState({count: 0});
+    }
+  };
+
   return (
     <View style={styles.page}>
       <View style={styles.header}>
@@ -75,16 +82,19 @@ const Signup = props => {
         </TouchableOpacity>
         <Text style={styles.headerText}>Create an Account</Text>
       </View>
-      <ViewPager initialPage={0} style={styles.container}>
+      <ViewPager style={styles.container} initialPage={state.count}>
         {state.data.map((c, index) => (
-          <Form
-            key={c.id}
-            id={c.id}
-            title={c.text1}
-            placeholder={c.placeholder}
-            text2={c.text2}
-            // scroll={scroll}
-          />
+          <View key={c.id}>
+            <Form
+              key={c.id}
+              id={c.id}
+              title={c.text1}
+              placeholder={c.placeholder}
+              text2={c.text2}
+              scroll={handleScroll}
+              // scroll={scroll}
+            />
+          </View>
         ))}
       </ViewPager>
     </View>

@@ -60,7 +60,7 @@ const Form = props => {
             onChange={handleEvent}
           />
         </View>
-        <Button onPress={console.log(state)}>Next</Button>
+        <Button onPress={props.scroll}>Next</Button>
         <Pagination id={props.id} />
       </View>
     </View>
