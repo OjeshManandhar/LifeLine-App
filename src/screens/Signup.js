@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import {
   StyleSheet,
   Dimensions,
-  ScrollView,
   View,
   Text,
   Image,
   TouchableOpacity,
 } from 'react-native';
+import ViewPager from '@react-native-community/viewpager';
 import Form from '../components/Form';
 import {Actions} from 'react-native-router-flux';
 
@@ -18,11 +18,6 @@ let Height = Dimensions.get('window').height;
 const Signup = props => {
   const [state, setState] = useState({
     count: 1,
-    email: '',
-    password: '',
-    name: '',
-    contact: '',
-    driver_id: '',
     data: [
       {
         id: 1,
@@ -56,10 +51,6 @@ const Signup = props => {
       },
     ],
   });
-
-  const handleInput = e => {
-    setState({name: e});
-  };
   // const scroller = useRef(null);
 
   // const scroll = () => {
@@ -84,11 +75,7 @@ const Signup = props => {
         </TouchableOpacity>
         <Text style={styles.headerText}>Create an Account</Text>
       </View>
-      <ScrollView
-        horizontal={true}
-        pagingEnabled={true}
-        showsHorizontalScrollIndicator={false}
-        style={styles.container}>
+      <ViewPager initialPage={0} style={styles.container}>
         {state.data.map((c, index) => (
           <Form
             key={c.id}
@@ -96,12 +83,10 @@ const Signup = props => {
             title={c.text1}
             placeholder={c.placeholder}
             text2={c.text2}
-            value={c.name}
-            input={handleInput}
             // scroll={scroll}
           />
         ))}
-      </ScrollView>
+      </ViewPager>
     </View>
   );
 };

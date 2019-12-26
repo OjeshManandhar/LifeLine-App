@@ -45,12 +45,6 @@ const Form = props => {
       setState({pasword: e.nativeEvent.text});
     }
   };
-
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   console.log(state.name);
-  // };
-
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{props.title}</Text>

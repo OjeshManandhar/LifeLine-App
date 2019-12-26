@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -11,9 +11,41 @@ import {
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
+import axios from 'axios';
+
 import Button from '../components/Button';
 
 const Login = () => {
+  const [state, setState] = useState({
+    name: '',
+    password: '',
+    token: '',
+  });
+
+  const handleLogin = () => {
+    var session_url = 'http://192.168.0.108:5000/login';
+    var uname = state.name;
+    var pass = state.password;
+    axios
+      .post(
+        session_url,
+        {},
+        {
+          auth: {
+            username: uname,
+            password: pass,
+          },
+        },
+      )
+      .then(function(response) {
+        setState({token: response.data});
+        Actions.home;
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -31,6 +63,8 @@ const Login = () => {
               placeholder="Email"
               style={styles.holder}
               autoCapitalize="none"
+              value={state.name}
+              onChange={e => setState({name: e.nativeEvent.text})}
               keyboardType="email-address"
             />
           </View>
@@ -40,11 +74,13 @@ const Login = () => {
               secureTextEntry
               placeholder="Password"
               style={styles.holder}
+              value={state.password}
+              onChange={e => setState({password: e.nativeEvent.text})}
               autoCapitalize="none"
             />
           </View>
           <View style={styles.button}>
-            <Button onPress={Actions.home}>Log In</Button>
+            <Button onPress={handleLogin}>Log In</Button>
           </View>
           <View style={styles.fotter}>
             <Text style={styles.text}>Don't have an account? </Text>
