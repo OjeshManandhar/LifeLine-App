@@ -1,22 +1,23 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Dimensions,
-  ScrollView,
   View,
   Text,
   Image,
   TouchableOpacity,
 } from 'react-native';
+import ViewPager from '@react-native-community/viewpager';
 import Form from '../components/Form';
+import {Actions} from 'react-native-router-flux';
 
-let scrollXPos = 0;
+// let scrollXPos = 0;
 let Width = Dimensions.get('window').width;
 let Height = Dimensions.get('window').height;
 
-export default class Signup extends Component {
-  state = {
-    count: 1,
+const Signup = props => {
+  const [state, setState] = useState({
+    count: 0,
     data: [
       {
         id: 1,
@@ -49,55 +50,58 @@ export default class Signup extends Component {
         text2: 'password.',
       },
     ],
-  };
+  });
+  // const scroller = useRef(null);
 
-  scrollTo = () => {
-    if (this.state.count < 5) {
-      scrollXPos = Width * this.state.count;
-      this.scroller.scrollTo({x: scrollXPos, y: 0});
-      this.setState({count: this.state.count + 1});
-    } else {
-      this.scroller.scrollTo({x: 0, y: 0});
-      this.setState({count: 1});
+  // const scroll = () => {
+  //   if (state.count < 5) {
+  //     scrollXPos = Width * state.count;
+  //     scroller.scrollTo({x: scrollXPos, y: 0});
+  //     setState({count: state.count + 1});
+  //   } else {
+  //     scroller.scrollTo({x: 0, y: 0});
+  //     setState({count: 1});
+  //   }
+  // };
+
+  const handleScroll = () => {
+    setState({count: state.count + 1});
+    if (state.count === 5) {
+      setState({count: 0});
     }
   };
 
-  render() {
-    const {navigate} = this.props.navigation;
-    return (
-      <View style={styles.page}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigate('Login')}>
-            <Image
-              style={styles.icon}
-              source={require('../assets/back_icon.png')}
-            />
-          </TouchableOpacity>
-          <Text style={styles.headerText}>Create an Account</Text>
-        </View>
-        <ScrollView
-          horizontal={true}
-          pagingEnabled={true}
-          showsHorizontalScrollIndicator={false}
-          style={styles.container}
-          ref={scroller => {
-            this.scroller = scroller;
-          }}>
-          {this.state.data.map(c => (
+  return (
+    <View style={styles.page}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={Actions.login}>
+          <Image
+            style={styles.icon}
+            source={require('../assets/back_icon.png')}
+          />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>Create an Account</Text>
+      </View>
+      <ViewPager style={styles.container} initialPage={state.count}>
+        {state.data.map((c, index) => (
+          <View key={c.id}>
             <Form
               key={c.id}
               id={c.id}
               title={c.text1}
               placeholder={c.placeholder}
               text2={c.text2}
-              scroll={this.scrollTo}
+              scroll={handleScroll}
+              // scroll={scroll}
             />
-          ))}
-        </ScrollView>
-      </View>
-    );
-  }
-}
+          </View>
+        ))}
+      </ViewPager>
+    </View>
+  );
+};
+
+export default Signup;
 
 const styles = StyleSheet.create({
   container: {
