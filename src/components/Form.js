@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -10,43 +10,64 @@ import {
 import Button from './Button';
 import Pagination from './Pagination';
 
-export default class Form extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      contact: '',
-      driverid: '',
-      username: '',
-      errorMessage: null,
-    };
-  }
+const Form = props => {
+  const [state, setState] = useState({
+    email: '',
+    password: '',
+    name: '',
+    contact: '',
+    driver_id: '',
+  });
+  const handleValue = () => {
+    if (props.id === 1) {
+      state.name;
+    } else if (props.id === 2) {
+      state.driver_id;
+    } else if (props.id === 3) {
+      state.email;
+    } else if (props.id === 4) {
+      state.contact;
+    } else {
+      state.password;
+    }
+  };
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.text}>{this.props.title}</Text>
-        <View style={styles.body}>
-          <Image style={styles.image} source={require('../assets/dummy.png')} />
-          <Text style={styles.text}>
-            Please give us your {this.props.text2}
-          </Text>
-          <View style={styles.textInput}>
-            <TextInput
-              placeholder={this.props.placeholder}
-              style={styles.holder}
-              autoCapitalize="none"
-              value={this.state.value}
-            />
-          </View>
-          <Button onPress={this.props.scroll}>Next</Button>
-          <Pagination id={this.props.id} />
+  const handleEvent = e => {
+    if (props.id === 1) {
+      setState({name: e.nativeEvent.text});
+    } else if (props.id === 2) {
+      setState({driver_id: e.nativeEvent.text});
+    } else if (props.id === 3) {
+      setState({email: e.nativeEvent.text});
+    } else if (props.id === 4) {
+      setState({contact: e.nativeEvent.text});
+    } else {
+      setState({pasword: e.nativeEvent.text});
+    }
+  };
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>{props.title}</Text>
+      <View style={styles.body}>
+        <Image style={styles.image} source={require('../assets/dummy.png')} />
+        <Text style={styles.text}>Please give us your {props.text2}</Text>
+        <View style={styles.textInput}>
+          <TextInput
+            placeholder={props.placeholder}
+            style={styles.holder}
+            autoCapitalize="none"
+            value={handleValue}
+            onChange={handleEvent}
+          />
         </View>
+        <Button onPress={props.scroll}>Next</Button>
+        <Pagination id={props.id} />
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
+
+export default Form;
 
 const styles = StyleSheet.create({
   container: {
