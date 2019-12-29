@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   Dimensions,
   Image,
-  TextInput,
+  TextInput
 } from 'react-native';
 import Button from './Button';
 import Pagination from './Pagination';
@@ -16,7 +16,7 @@ const Form = props => {
     password: '',
     name: '',
     contact: '',
-    driver_id: '',
+    driver_id: ''
   });
   const handleValue = () => {
     if (props.id === 1) {
@@ -34,15 +34,15 @@ const Form = props => {
 
   const handleEvent = e => {
     if (props.id === 1) {
-      setState({name: e.nativeEvent.text});
+      setState({ name: e.nativeEvent.text });
     } else if (props.id === 2) {
-      setState({driver_id: e.nativeEvent.text});
+      setState({ driver_id: e.nativeEvent.text });
     } else if (props.id === 3) {
-      setState({email: e.nativeEvent.text});
+      setState({ email: e.nativeEvent.text });
     } else if (props.id === 4) {
-      setState({contact: e.nativeEvent.text});
+      setState({ contact: e.nativeEvent.text });
     } else {
-      setState({pasword: e.nativeEvent.text});
+      setState({ pasword: e.nativeEvent.text });
     }
   };
   return (
@@ -55,7 +55,7 @@ const Form = props => {
           <TextInput
             placeholder={props.placeholder}
             style={styles.holder}
-            autoCapitalize="none"
+            autoCapitalize='none'
             value={handleValue}
             onChange={handleEvent}
           />
@@ -73,20 +73,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    height: Dimensions.get('window').height
   },
   text: {
     color: '#707070',
     fontSize: 18,
-    margin: 20,
+    margin: 20
   },
   body: {
-    alignItems: 'center',
+    alignItems: 'center'
   },
   image: {
     height: 200,
     width: 200,
-    resizeMode: 'cover',
+    resizeMode: 'cover'
   },
   textInput: {
     marginTop: 5,
@@ -95,11 +95,11 @@ const styles = StyleSheet.create({
     opacity: 0.7,
     borderColor: '#707070',
     borderRadius: 11,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   holder: {
     height: 40,
     width: 280,
-    padding: 10,
-  },
+    padding: 10
+  }
 });

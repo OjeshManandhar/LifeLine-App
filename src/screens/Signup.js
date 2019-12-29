@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Dimensions,
   View,
   Text,
   Image,
-  TouchableOpacity,
+  TouchableOpacity
 } from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
 import Form from '../components/Form';
-import {Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 
 // let scrollXPos = 0;
 let Width = Dimensions.get('window').width;
@@ -23,33 +23,33 @@ const Signup = props => {
         id: 1,
         text1: 'Lets get started...',
         placeholder: 'User Name',
-        text2: 'name.',
+        text2: 'name.'
       },
       {
         id: 2,
         text1: 'Great, We need a few more information.',
         placeholder: 'Driver ID',
-        text2: 'driver ID.',
+        text2: 'driver ID.'
       },
       {
         id: 3,
         text1: 'Great, We need a few more information.',
         placeholder: 'abc@mail.com',
-        text2: 'email.',
+        text2: 'email.'
       },
       {
         id: 4,
         text1: 'Almost there ...',
         placeholder: '98********',
-        text2: 'contact.',
+        text2: 'contact.'
       },
       {
         id: 5,
         text1: 'Now, for the final step!!',
         placeholder: 'Password',
-        text2: 'password.',
-      },
-    ],
+        text2: 'password.'
+      }
+    ]
   });
   // const scroller = useRef(null);
 
@@ -65,9 +65,9 @@ const Signup = props => {
   // };
 
   const handleScroll = () => {
-    setState({count: state.count + 1});
+    setState({ count: state.count + 1 });
     if (state.count === 5) {
-      setState({count: 0});
+      setState({ count: 0 });
     }
   };
 
@@ -107,12 +107,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: Width,
-    height: Height,
+    height: Height
   },
   page: {
     flexDirection: 'column',
     height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
+    width: Dimensions.get('window').width
     //justifyContent: 'center',
   },
   header: {
@@ -122,15 +122,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#F53D3D',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingLeft: 20,
+    paddingLeft: 20
   },
   headerText: {
     color: 'white',
     fontSize: 25,
-    marginLeft: 20,
+    marginLeft: 20
   },
   icon: {
     height: 30,
-    width: 30,
-  },
+    width: 30
+  }
 });

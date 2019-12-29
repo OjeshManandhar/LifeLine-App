@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text} from 'react-native';
+import { Text } from 'react-native';
 import axios from 'axios';
 
 // axios.get('http://192.168.1.125:5000/driver').then(res => {
@@ -35,9 +35,9 @@ export default class UserList extends React.Component {
         {
           auth: {
             username: uname,
-            password: pass,
-          },
-        },
+            password: pass
+          }
+        }
       )
       .then(function(response) {
         console.log(response.data);

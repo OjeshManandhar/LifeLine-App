@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,9 +7,9 @@ import {
   TextInput,
   TouchableOpacity,
   ImageBackground,
-  Dimensions,
+  Dimensions
 } from 'react-native';
-import {Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 
 import axios from 'axios';
 
@@ -19,7 +19,7 @@ const Login = () => {
   const [state, setState] = useState({
     name: '',
     password: '',
-    token: '',
+    token: ''
   });
 
   const handleLogin = () => {
@@ -33,12 +33,12 @@ const Login = () => {
         {
           auth: {
             username: uname,
-            password: pass,
-          },
-        },
+            password: pass
+          }
+        }
       )
       .then(function(response) {
-        setState({token: response.data});
+        setState({ token: response.data });
         Actions.home;
       })
       .catch(function(error) {
@@ -50,7 +50,8 @@ const Login = () => {
     <View style={styles.container}>
       <ImageBackground
         style={styles.background}
-        source={require('../assets/Back.png')}>
+        source={require('../assets/Back.png')}
+      >
         <View style={styles.header}>
           <Text style={styles.title}>LifeLine - Driver</Text>
           <Image style={styles.logo} source={require('../assets/logo.png')} />
@@ -60,23 +61,23 @@ const Login = () => {
           <View style={styles.textInput}>
             <Image style={styles.icon} source={require('../assets/Mail.png')} />
             <TextInput
-              placeholder="Email"
+              placeholder='Email'
               style={styles.holder}
-              autoCapitalize="none"
+              autoCapitalize='none'
               value={state.name}
-              onChange={e => setState({name: e.nativeEvent.text})}
-              keyboardType="email-address"
+              onChange={e => setState({ name: e.nativeEvent.text })}
+              keyboardType='email-address'
             />
           </View>
           <View style={styles.textInput}>
             <Image style={styles.icon} source={require('../assets/Lock.png')} />
             <TextInput
               secureTextEntry
-              placeholder="Password"
+              placeholder='Password'
               style={styles.holder}
               value={state.password}
-              onChange={e => setState({password: e.nativeEvent.text})}
-              autoCapitalize="none"
+              onChange={e => setState({ password: e.nativeEvent.text })}
+              autoCapitalize='none'
             />
           </View>
           <View style={styles.button}>
@@ -99,36 +100,35 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    fontFamily: 'sans-serif',
+    fontFamily: 'sans-serif'
   },
   background: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
-    resizeMode: 'stretch',
+    resizeMode: 'stretch'
   },
   header: {
     flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: -25,
+    marginTop: -25
   },
   content: {
     flex: 3,
     justifyContent: 'flex-start',
-    alignItems: 'center',
+    alignItems: 'center'
   },
-
   title: {
     color: 'white',
     fontSize: 25,
     marginTop: 50,
-    marginBottom: 10,
+    marginBottom: 10
   },
   logo: {
     height: 120,
     width: 120,
     marginTop: 10,
-    zIndex: 1,
+    zIndex: 1
   },
   textInput: {
     marginTop: 25,
@@ -137,27 +137,27 @@ const styles = StyleSheet.create({
     borderColor: '#707070',
     borderRadius: 11,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   holder: {
     height: 40,
     width: 250,
-    padding: 10,
+    padding: 10
   },
   icon: {
-    marginLeft: 10,
+    marginLeft: 10
   },
   button: {
-    marginTop: 25,
+    marginTop: 25
   },
   fotter: {
     marginTop: 25,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   text: {
-    fontSize: 15,
+    fontSize: 15
   },
   link: {
-    color: '#FF3A3A',
-  },
+    color: '#FF3A3A'
+  }
 });

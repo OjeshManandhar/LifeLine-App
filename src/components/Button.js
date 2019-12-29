@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, Text} from 'react-native';
+import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 class Button extends React.Component {
   render() {
@@ -20,12 +20,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF3A3A',
     borderWidth: 2,
     borderRadius: 11,
-    borderColor: '#FF3A3A',
+    borderColor: '#FF3A3A'
   },
   textStyle: {
     fontSize: 15,
-    color: '#fff',
-  },
+    color: '#fff'
+  }
 });
 
 export default Button;
