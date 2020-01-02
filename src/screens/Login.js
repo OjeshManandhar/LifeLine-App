@@ -23,27 +23,32 @@ const Login = () => {
   });
 
   const handleLogin = () => {
-    var session_url = 'http://192.168.0.108:5000/login';
-    var uname = state.name;
-    var pass = state.password;
-    axios
-      .post(
-        session_url,
-        {},
-        {
-          auth: {
-            username: uname,
-            password: pass
-          }
-        }
-      )
-      .then(function(response) {
-        setState({ token: response.data });
-        Actions.home;
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    // var session_url = 'http://192.168.0.108:5000/login';
+    // var uname = state.name;
+    // var pass = state.password;
+    // axios
+    //   .post(
+    //     session_url,
+    //     {},
+    //     {
+    //       auth: {
+    //         username: uname,
+    //         password: pass
+    //       }
+    //     }
+    //   )
+    //   .then(function(response) {
+    //     setState({ token: response.data });
+    //     Actions.map({ userName: 'DeadSkull' });
+    //   })
+    //   .catch(function(error) {
+    //     console.log(error);
+    //   });
+
+    Actions.map({
+      userName: 'DeadSkull',
+      phone: '9863198269'
+    });
   };
 
   return (
@@ -53,7 +58,7 @@ const Login = () => {
         source={require('../assets/Back.png')}
       >
         <View style={styles.header}>
-          <Text style={styles.title}>LifeLine - Driver</Text>
+          <Text style={styles.title}>LifeLine - </Text>
           <Image style={styles.logo} source={require('../assets/logo.png')} />
           <View style={styles.shadow} />
         </View>
