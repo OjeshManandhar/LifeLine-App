@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -9,23 +9,20 @@ import {
   ImageBackground,
   Dimensions,
 } from 'react-native';
-import {Actions} from 'react-native-router-flux';
 
 import axios from 'axios';
 
 import Button from '../components/Button';
 
-const Login = () => {
-  const [state, setState] = useState({
-    name: '',
-    password: '',
-    token: '',
-  });
+const Login = ({navigation}) => {
+  const [name, setName] = useState('');
+  const [pass, setPass] = useState('');
+  const [token, setToken] = useState('');
 
-  const handleLogin = () => {
-    var session_url = 'http://192.168.0.108:5000/login';
-    var uname = state.name;
-    var pass = state.password;
+  function handleLogin() {
+    var session_url = 'http://192.168.0.3:5000/login';
+    var uname = name;
+    var password = pass;
     axios
       .post(
         session_url,
@@ -33,18 +30,19 @@ const Login = () => {
         {
           auth: {
             username: uname,
-            password: pass,
+            password: password,
           },
         },
       )
       .then(function(response) {
-        setState({token: response.data});
-        Actions.home;
+        setToken(response.data);
+        console.log(token);
+        navigation.navigate('home', {name: 'home'});
       })
       .catch(function(error) {
         console.log(error);
       });
-  };
+  }
 
   return (
     <View style={styles.container}>
@@ -60,12 +58,12 @@ const Login = () => {
           <View style={styles.textInput}>
             <Image style={styles.icon} source={require('../assets/Mail.png')} />
             <TextInput
-              placeholder="Email"
+              placeholder="name"
               style={styles.holder}
               autoCapitalize="none"
-              value={state.name}
-              onChange={e => setState({name: e.nativeEvent.text})}
-              keyboardType="email-address"
+              autoCompleteType="name"
+              value={name}
+              onChange={e => setName(e.nativeEvent.text)}
             />
           </View>
           <View style={styles.textInput}>
@@ -74,17 +72,18 @@ const Login = () => {
               secureTextEntry
               placeholder="Password"
               style={styles.holder}
-              value={state.password}
-              onChange={e => setState({password: e.nativeEvent.text})}
+              value={pass}
+              onChange={e => setPass(e.nativeEvent.text)}
               autoCapitalize="none"
             />
           </View>
           <View style={styles.button}>
-            <Button onPress={handleLogin}>Log In</Button>
+            <Button onPress={() => handleLogin()}>Log In</Button>
           </View>
           <View style={styles.fotter}>
             <Text style={styles.text}>Don't have an account? </Text>
-            <TouchableOpacity onPress={Actions.signup}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('signup', {name: 'signup'})}>
               <Text style={[styles.text, styles.link]}>Sign Up</Text>
             </TouchableOpacity>
           </View>
