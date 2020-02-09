@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {
   StyleSheet,
   Dimensions,
@@ -8,17 +8,16 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
-import Form from '../components/Form';
-import {Actions} from 'react-native-router-flux';
+import Forms from '../components/Form';
 
-// let scrollXPos = 0;
+let scrollXPos = 0;
 let Width = Dimensions.get('window').width;
 let Height = Dimensions.get('window').height;
 
-const Signup = props => {
+const Signup = ({navigation}) => {
   const [state, setState] = useState({
     count: 0,
-    data: [
+    datas: [
       {
         id: 1,
         text1: 'Lets get started...',
@@ -51,30 +50,33 @@ const Signup = props => {
       },
     ],
   });
-  // const scroller = useRef(null);
+  const scroller = useRef(0);
 
   // const scroll = () => {
   //   if (state.count < 5) {
   //     scrollXPos = Width * state.count;
-  //     scroller.scrollTo({x: scrollXPos, y: 0});
+  //     scroller.current.scrollTo({x: scrollXPos, y: 0});
   //     setState({count: state.count + 1});
   //   } else {
-  //     scroller.scrollTo({x: 0, y: 0});
+  //     scroller.current.scrollTo({x: 0, y: 0});
   //     setState({count: 1});
   //   }
   // };
 
-  const handleScroll = () => {
-    setState({count: state.count + 1});
-    if (state.count === 5) {
-      setState({count: 0});
+  const handleScroll = e => {
+    if (scroller.current < 5) {
+      scroller.current++;
+    } else {
+      scroller.current = 0;
     }
+    console.log(e.nativeEvent);
   };
 
   return (
     <View style={styles.page}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={Actions.login}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('login', {name: 'login'})}>
           <Image
             style={styles.icon}
             source={require('../assets/back_icon.png')}
@@ -82,17 +84,22 @@ const Signup = props => {
         </TouchableOpacity>
         <Text style={styles.headerText}>Create an Account</Text>
       </View>
-      <ViewPager style={styles.container} initialPage={state.count}>
-        {state.data.map((c, index) => (
+      <ViewPager
+        style={styles.container}
+        initialPage={0}
+        showPageIndicator={true}
+        scrollEnabled={true}
+        orientation="horizontal">
+        {state.datas.map(c => (
           <View key={c.id}>
-            <Form
+            <Forms
               key={c.id}
               id={c.id}
+              ref={scroller}
               title={c.text1}
               placeholder={c.placeholder}
               text2={c.text2}
               scroll={handleScroll}
-              // scroll={scroll}
             />
           </View>
         ))}

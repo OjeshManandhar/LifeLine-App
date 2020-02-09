@@ -9,44 +9,77 @@ import {
 } from 'react-native';
 import Button from './Button';
 import Pagination from './Pagination';
+import axios from 'axios';
 
-const Form = props => {
-  const [state, setState] = useState({
+const Form = (props, ref) => {
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [name, setName] = useState('');
+  // const [contact, setContact] = useState('');
+  // const [driver_id, setDriverId] = useState('');
+
+  const [form, setState] = useState({
     email: '',
     password: '',
     name: '',
     contact: '',
     driver_id: '',
   });
+
   const handleValue = () => {
     if (props.id === 1) {
-      state.name;
+      form.name;
     } else if (props.id === 2) {
-      state.driver_id;
+      form.driver_id;
     } else if (props.id === 3) {
-      state.email;
+      form.email;
     } else if (props.id === 4) {
-      state.contact;
+      form.contact;
     } else {
-      state.password;
+      form.password;
     }
   };
 
   const handleEvent = e => {
     if (props.id === 1) {
-      setState({name: e.nativeEvent.text});
+      setState({...form, name: e.nativeEvent.text});
     } else if (props.id === 2) {
-      setState({driver_id: e.nativeEvent.text});
+      setState({...form, driver_id: e.nativeEvent.text});
     } else if (props.id === 3) {
-      setState({email: e.nativeEvent.text});
+      setState({...form, email: e.nativeEvent.text});
     } else if (props.id === 4) {
-      setState({contact: e.nativeEvent.text});
+      setState({...form, contact: e.nativeEvent.text});
     } else {
-      setState({pasword: e.nativeEvent.text});
+      setState({...form, password: e.nativeEvent.text});
     }
   };
+
+  function handleSubmit() {
+    if (props.id === 5) {
+      axios
+        .post('http://192.168.0.3:5000/driver_signup', {
+          // data to be sent
+          name: form.name,
+          email: form.email,
+          password: form.password,
+          driver_id: form.driver_id,
+          contact: form.contact,
+        })
+        .then(response => {
+          if (response.data.status) {
+            console.log(response);
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } else {
+      console.log(form);
+    }
+  }
+
   return (
-    <View style={styles.container}>
+    <View ref={ref} style={styles.container} key={props.id}>
       <Text style={styles.text}>{props.title}</Text>
       <View style={styles.body}>
         <Image style={styles.image} source={require('../assets/dummy.png')} />
@@ -60,14 +93,16 @@ const Form = props => {
             onChange={handleEvent}
           />
         </View>
-        <Button onPress={props.scroll}>Next</Button>
+        <Button onPress={() => handleSubmit()}>Next</Button>
         <Pagination id={props.id} />
       </View>
     </View>
   );
 };
 
-export default Form;
+const Forms = React.forwardRef(Form);
+
+export default Forms;
 
 const styles = StyleSheet.create({
   container: {
