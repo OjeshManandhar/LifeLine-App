@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -9,77 +9,10 @@ import {
 } from 'react-native';
 import Button from './Button';
 import Pagination from './Pagination';
-import axios from 'axios';
 
-const Form = (props, ref) => {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [name, setName] = useState('');
-  // const [contact, setContact] = useState('');
-  // const [driver_id, setDriverId] = useState('');
-
-  const [form, setState] = useState({
-    email: '',
-    password: '',
-    name: '',
-    contact: '',
-    driver_id: '',
-  });
-
-  const handleValue = () => {
-    if (props.id === 1) {
-      form.name;
-    } else if (props.id === 2) {
-      form.driver_id;
-    } else if (props.id === 3) {
-      form.email;
-    } else if (props.id === 4) {
-      form.contact;
-    } else {
-      form.password;
-    }
-  };
-
-  const handleEvent = e => {
-    if (props.id === 1) {
-      setState({...form, name: e.nativeEvent.text});
-    } else if (props.id === 2) {
-      setState({...form, driver_id: e.nativeEvent.text});
-    } else if (props.id === 3) {
-      setState({...form, email: e.nativeEvent.text});
-    } else if (props.id === 4) {
-      setState({...form, contact: e.nativeEvent.text});
-    } else {
-      setState({...form, password: e.nativeEvent.text});
-    }
-  };
-
-  function handleSubmit() {
-    if (props.id === 5) {
-      axios
-        .post('http://192.168.0.3:5000/driver_signup', {
-          // data to be sent
-          name: form.name,
-          email: form.email,
-          password: form.password,
-          driver_id: form.driver_id,
-          contact: form.contact,
-        })
-        .then(response => {
-          if (response.data.status) {
-            console.log(response);
-          }
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    } else {
-      console.log(form);
-    }
-  }
-
+const Form = props => {
   return (
-    <View ref={ref} style={styles.container} key={props.id}>
+    <View style={styles.container} key={props.id}>
       <Text style={styles.text}>{props.title}</Text>
       <View style={styles.body}>
         <Image style={styles.image} source={require('../assets/dummy.png')} />
@@ -89,20 +22,18 @@ const Form = (props, ref) => {
             placeholder={props.placeholder}
             style={styles.holder}
             autoCapitalize="none"
-            value={handleValue}
-            onChange={handleEvent}
+            value={props.value}
+            onChange={props.setState}
           />
         </View>
-        <Button onPress={() => handleSubmit()}>Next</Button>
+        <Button onPress={() => console.log(props.value)}>Next</Button>
         <Pagination id={props.id} />
       </View>
     </View>
   );
 };
 
-const Forms = React.forwardRef(Form);
-
-export default Forms;
+export default Form;
 
 const styles = StyleSheet.create({
   container: {

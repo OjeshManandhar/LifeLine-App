@@ -10,8 +10,13 @@ import {
   Dimensions,
 } from 'react-native';
 
+// package
 import axios from 'axios';
 
+//const
+import {Ip} from '../const';
+
+// component
 import Button from '../components/Button';
 
 const Login = ({navigation}) => {
@@ -20,7 +25,7 @@ const Login = ({navigation}) => {
   const [token, setToken] = useState('');
 
   function handleLogin() {
-    var session_url = 'http://192.168.0.3:5000/driver_login';
+    var session_url = Ip.driver_login;
     var uname = name;
     var password = pass;
     axios

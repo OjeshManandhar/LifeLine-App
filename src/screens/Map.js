@@ -1,6 +1,11 @@
 import React, {useState} from 'react';
 import {View, Text, Button} from 'react-native';
+
+//package
 import axios from 'axios';
+
+//const
+import {Ip} from '../const';
 
 const Map = () => {
   // const [email, setEmail] = useState('');
@@ -9,10 +14,12 @@ const Map = () => {
   // const [driver_id, setDriverId] = useState('');
 
   function users() {
-    axios.get('http://192.168.0.3:5000/driver').then(res => {
+    axios.get(Ip.driver).then(res => {
+      const nameList = [];
       res.data.map(c => {
-        setName([...name, c.name]);
+        nameList.push(c.name);
       });
+      setName(nameList);
     });
   }
 

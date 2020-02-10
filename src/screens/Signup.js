@@ -7,49 +7,99 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+
+// package
+import axios from 'axios';
 import ViewPager from '@react-native-community/viewpager';
-import Forms from '../components/Form';
+
+//const
+import {Ip} from '../const';
+
+// conponent
+import Form from '../components/Form';
 
 let scrollXPos = 0;
 let Width = Dimensions.get('window').width;
 let Height = Dimensions.get('window').height;
 
 const Signup = ({navigation}) => {
-  const [state, setState] = useState({
-    count: 0,
-    datas: [
-      {
-        id: 1,
-        text1: 'Lets get started...',
-        placeholder: 'User Name',
-        text2: 'name.',
-      },
-      {
-        id: 2,
-        text1: 'Great, We need a few more information.',
-        placeholder: 'Driver ID',
-        text2: 'driver ID.',
-      },
-      {
-        id: 3,
-        text1: 'Great, We need a few more information.',
-        placeholder: 'abc@mail.com',
-        text2: 'email.',
-      },
-      {
-        id: 4,
-        text1: 'Almost there ...',
-        placeholder: '98********',
-        text2: 'contact.',
-      },
-      {
-        id: 5,
-        text1: 'Now, for the final step!!',
-        placeholder: 'Password',
-        text2: 'password.',
-      },
-    ],
-  });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [contact, setContact] = useState('');
+  const [driver_id, setDriverId] = useState('');
+
+  const data = [
+    {
+      id: 1,
+      setState: setName,
+      value: name,
+      text1: 'Lets get started...',
+      placeholder: 'User Name',
+      text2: 'name.',
+      submit: false,
+    },
+    {
+      id: 2,
+      value: driver_id,
+      setState: setDriverId,
+      text1: 'Great, We need a few more information.',
+      placeholder: 'Driver ID',
+      text2: 'driver ID.',
+      submit: false,
+    },
+    {
+      id: 3,
+      value: email,
+      setState: setEmail,
+      text1: 'Great, We need a few more information.',
+      placeholder: 'abc@mail.com',
+      text2: 'email.',
+      submit: false,
+    },
+    {
+      id: 4,
+      value: contact,
+      setState: setContact,
+      text1: 'Almost there ...',
+      placeholder: '98********',
+      text2: 'contact.',
+      submit: false,
+    },
+    {
+      id: 5,
+      value: password,
+      setState: setPassword,
+      text1: 'Now, for the final step!!',
+      placeholder: 'Password',
+      text2: 'password.',
+      submit: true,
+      onSubmit: onSubmit,
+    },
+  ];
+
+  const inputRef = useRef();
+
+  function onSubmit() {
+    axios
+      .post(Ip.driver_signup, {
+        // data to be sent
+        name: name,
+        email: email,
+        password: password,
+        driver_id: driver_id,
+        contact: contact,
+      })
+      .then(response => {
+        if (response.data.status) {
+          console.log(response);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   const scroller = useRef(0);
 
   // const scroll = () => {
@@ -85,21 +135,22 @@ const Signup = ({navigation}) => {
         <Text style={styles.headerText}>Create an Account</Text>
       </View>
       <ViewPager
+        ref={inputRef}
         style={styles.container}
         initialPage={0}
         showPageIndicator={true}
         scrollEnabled={true}
         orientation="horizontal">
-        {state.datas.map(c => (
+        {data.map(c => (
           <View key={c.id}>
-            <Forms
+            <Form
               key={c.id}
               id={c.id}
-              ref={scroller}
               title={c.text1}
-              placeholder={c.placeholder}
               text2={c.text2}
-              scroll={handleScroll}
+              placeholder={c.placeholder}
+              value={c.value}
+              setState={c.setState}
             />
           </View>
         ))}
