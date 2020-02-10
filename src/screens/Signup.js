@@ -13,14 +13,14 @@ import axios from 'axios';
 import ViewPager from '@react-native-community/viewpager';
 
 //const
-import {Ip} from '../const';
+import {Ip} from '../const/ip';
 
 // conponent
 import Form from '../components/Form';
+import Button from '../components/Button';
 
-let scrollXPos = 0;
 let Width = Dimensions.get('window').width;
-let Height = Dimensions.get('window').height;
+// let Height = Dimensions.get('window').height;
 
 const Signup = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -33,7 +33,7 @@ const Signup = ({navigation}) => {
     {
       id: 1,
       setState: setName,
-      value: name,
+      state: name,
       text1: 'Lets get started...',
       placeholder: 'User Name',
       text2: 'name.',
@@ -41,7 +41,7 @@ const Signup = ({navigation}) => {
     },
     {
       id: 2,
-      value: driver_id,
+      state: driver_id,
       setState: setDriverId,
       text1: 'Great, We need a few more information.',
       placeholder: 'Driver ID',
@@ -50,7 +50,7 @@ const Signup = ({navigation}) => {
     },
     {
       id: 3,
-      value: email,
+      state: email,
       setState: setEmail,
       text1: 'Great, We need a few more information.',
       placeholder: 'abc@mail.com',
@@ -59,7 +59,7 @@ const Signup = ({navigation}) => {
     },
     {
       id: 4,
-      value: contact,
+      state: contact,
       setState: setContact,
       text1: 'Almost there ...',
       placeholder: '98********',
@@ -68,7 +68,7 @@ const Signup = ({navigation}) => {
     },
     {
       id: 5,
-      value: password,
+      state: password,
       setState: setPassword,
       text1: 'Now, for the final step!!',
       placeholder: 'Password',
@@ -84,44 +84,20 @@ const Signup = ({navigation}) => {
     axios
       .post(Ip.driver_signup, {
         // data to be sent
-        name: name,
-        email: email,
-        password: password,
-        driver_id: driver_id,
-        contact: contact,
+        name,
+        email,
+        password,
+        driver_id,
+        contact,
       })
       .then(response => {
-        if (response.data.status) {
-          console.log(response);
-        }
+        console.log(response.data);
+        navigation.navigate('home', {name: 'home'});
       })
       .catch(error => {
         console.log(error);
       });
   }
-
-  const scroller = useRef(0);
-
-  // const scroll = () => {
-  //   if (state.count < 5) {
-  //     scrollXPos = Width * state.count;
-  //     scroller.current.scrollTo({x: scrollXPos, y: 0});
-  //     setState({count: state.count + 1});
-  //   } else {
-  //     scroller.current.scrollTo({x: 0, y: 0});
-  //     setState({count: 1});
-  //   }
-  // };
-
-  const handleScroll = e => {
-    if (scroller.current < 5) {
-      scroller.current++;
-    } else {
-      scroller.current = 0;
-    }
-    console.log(e.nativeEvent);
-  };
-
   return (
     <View style={styles.page}>
       <View style={styles.header}>
@@ -149,12 +125,15 @@ const Signup = ({navigation}) => {
               title={c.text1}
               text2={c.text2}
               placeholder={c.placeholder}
-              value={c.value}
+              state={c.state}
               setState={c.setState}
             />
           </View>
         ))}
       </ViewPager>
+      <Button style={styles.button} onPress={() => onSubmit()} title="Next">
+        Next
+      </Button>
     </View>
   );
 };
@@ -163,15 +142,17 @@ export default Signup;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     width: Width,
-    height: Height,
+    height: '70%',
+    marginBottom: 0,
   },
   page: {
     flexDirection: 'column',
     height: Dimensions.get('window').height,
     width: Dimensions.get('window').width,
     //justifyContent: 'center',
+    alignItems: 'center',
   },
   header: {
     width: '100%',
@@ -190,5 +171,9 @@ const styles = StyleSheet.create({
   icon: {
     height: 30,
     width: 30,
+  },
+  button: {
+    margin: 0,
+    width: '10%',
   },
 });

@@ -5,13 +5,10 @@ import {View, Text, Button} from 'react-native';
 import axios from 'axios';
 
 //const
-import {Ip} from '../const';
+import {Ip} from '../const/ip';
 
 const Map = () => {
-  // const [email, setEmail] = useState('');
   const [name, setName] = useState([]);
-  // const [contact, setContact] = useState('');
-  // const [driver_id, setDriverId] = useState('');
 
   function users() {
     axios.get(Ip.driver).then(res => {

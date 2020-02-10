@@ -14,7 +14,7 @@ import {
 import axios from 'axios';
 
 //const
-import {Ip} from '../const';
+import {Ip} from '../const/ip';
 
 // component
 import Button from '../components/Button';

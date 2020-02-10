@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     height: 10,
     borderRadius: 10 / 2,
     margin: 18,
-    marginTop: 40,
+    marginTop: 5,
   },
   circleG: {
     backgroundColor: 'grey',

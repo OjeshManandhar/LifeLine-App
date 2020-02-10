@@ -7,7 +7,6 @@ import {
   Image,
   TextInput,
 } from 'react-native';
-import Button from './Button';
 import Pagination from './Pagination';
 
 const Form = props => {
@@ -22,11 +21,11 @@ const Form = props => {
             placeholder={props.placeholder}
             style={styles.holder}
             autoCapitalize="none"
-            value={props.value}
-            onChange={props.setState}
+            value={props.state}
+            onChange={e => props.setState(e.nativeEvent.text)}
           />
         </View>
-        <Button onPress={() => console.log(props.value)}>Next</Button>
+        {/* <Button onPress={() => console.log(props.value)}>Next</Button> */}
         <Pagination id={props.id} />
       </View>
     </View>
