@@ -63,7 +63,7 @@ const Login = ({navigation}) => {
           <View style={styles.textInput}>
             <Image style={styles.icon} source={require('../assets/Mail.png')} />
             <TextInput
-              placeholder="name"
+              placeholder="Name"
               style={styles.holder}
               autoCapitalize="none"
               autoCompleteType="name"

@@ -1,5 +1,5 @@
 import React from 'react';
-import Map from './src/screens/Map';
+import Users from './src/screens/Users';
 import Login from './src/screens/Login';
 import Signup from './src/screens/Signup';
 import {NavigationContainer} from '@react-navigation/native';
@@ -10,6 +10,13 @@ const Stack = createStackNavigator();
 const App = () => (
   <NavigationContainer>
     <Stack.Navigator>
+      <Stack.Screen
+        name="home"
+        component={Users}
+        options={{
+          title: 'Users',
+        }}
+      />
       <Stack.Screen
         name="login"
         component={Login}
@@ -22,13 +29,6 @@ const App = () => (
         component={Signup}
         options={{
           headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="home"
-        component={Map}
-        options={{
-          title: 'Map',
         }}
       />
     </Stack.Navigator>
