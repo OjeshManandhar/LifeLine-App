@@ -8,7 +8,6 @@ import {createStackNavigator} from 'react-navigation-stack';
 // Screens
 import Users from './src/screens/Users';
 import Login from './src/screens/Login';
-import Signup from './src/screens/Signup';
 
 const AppNavigator = createStackNavigator(
   {
