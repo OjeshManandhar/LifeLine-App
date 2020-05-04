@@ -8,14 +8,18 @@ import {createStackNavigator} from 'react-navigation-stack';
 // Screens
 import Users from './src/screens/Users';
 import Login from './src/screens/Login';
+import Home from './src/screens/Home';
+import Detail from './src/screens/Detail';
 
 const AppNavigator = createStackNavigator(
   {
     Users: {screen: Users},
     Login: {screen: Login},
+    Home: {screen: Home},
+    Detail: {screen: Detail},
   },
   {
-    initialRouteName: 'Users',
+    initialRouteName: 'Home',
     defaultNavigationOptions: {
       headerShown: false,
     },
