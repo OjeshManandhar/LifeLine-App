@@ -42,7 +42,7 @@ const Login = ({navigation}) => {
       .then(function(response) {
         setToken(response.data);
         console.log(token);
-        navigation.navigate('home', {name: 'home'});
+        navigation.navigate('Users');
       })
       .catch(function(error) {
         console.log(error);
