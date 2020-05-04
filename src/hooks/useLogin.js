@@ -27,7 +27,7 @@ const useLogin = navigation => {
       .then(function(response) {
         setToken(response.data);
         console.log(token);
-        navigation.navigate('Users');
+        navigation.navigate('Home');
       })
       .catch(function(error) {
         console.log(error);
