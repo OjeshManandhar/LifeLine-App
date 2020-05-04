@@ -1,53 +1,22 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   View,
   Text,
   StyleSheet,
   Image,
   TextInput,
-  TouchableOpacity,
   ImageBackground,
   Dimensions,
 } from 'react-native';
 
-// package
-import axios from 'axios';
-
-//const
-import {Ip} from '../const/ip';
-
 // component
 import Button from '../components/Button';
 
-const Login = ({navigation}) => {
-  const [name, setName] = useState('');
-  const [pass, setPass] = useState('');
-  const [token, setToken] = useState('');
+// hooks
+import useLogin from '../hooks/useLogin';
 
-  function handleLogin() {
-    var session_url = Ip.driver_login;
-    var uname = name;
-    var password = pass;
-    axios
-      .post(
-        session_url,
-        {},
-        {
-          auth: {
-            username: uname,
-            password: password,
-          },
-        },
-      )
-      .then(function(response) {
-        setToken(response.data);
-        console.log(token);
-        navigation.navigate('Users');
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  }
+const Login = ({navigation}) => {
+  const {name, setName, pass, setPass, handleLogin} = useLogin(navigation);
 
   return (
     <View style={styles.container}>
@@ -83,14 +52,10 @@ const Login = ({navigation}) => {
             />
           </View>
           <View style={styles.button}>
-            <Button onPress={() => handleLogin()}>Log In</Button>
+            <Button onPress={handleLogin} title="Login" />
           </View>
           <View style={styles.fotter}>
             <Text style={styles.text}>Don't have an account? </Text>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('signup', {name: 'signup'})}>
-              <Text style={[styles.text, styles.link]}>Sign Up</Text>
-            </TouchableOpacity>
           </View>
         </View>
       </ImageBackground>
@@ -160,8 +125,5 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
-  },
-  link: {
-    color: '#FF3A3A',
   },
 });
