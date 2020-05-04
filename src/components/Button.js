@@ -1,15 +1,13 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 
-class Button extends React.Component {
-  render() {
-    return (
-      <TouchableOpacity style={styles.container} onPress={this.props.onPress}>
-        <Text style={styles.textStyle}>{this.props.children}</Text>
-      </TouchableOpacity>
-    );
-  }
-}
+const Button = ({title, onPress}) => {
+  return (
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Text style={styles.textStyle}>{title}</Text>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
