@@ -1,68 +1,14 @@
-import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  BackHandler,
-  Keyboard,
-} from 'react-native';
+import React from 'react';
+import {View, Text, ScrollView, StyleSheet, Keyboard} from 'react-native';
+
+// hooks
+import useSearch from '../hooks/useSearch';
 
 // components
 import SearchResult from './SearchResult';
 
-// env
-import {MAPBOX_API_KEY} from 'react-native-dotenv';
-
-const mbxGeocoder = require('@mapbox/mapbox-sdk/services/geocoding');
-const geocodingClient = mbxGeocoder({accessToken: MAPBOX_API_KEY});
-
 function SearchList(props) {
-  const [response, setResponse] = useState('');
-
-  function parseResponse(match) {
-    const locations = [];
-    const features = match.features;
-
-    for (let key in features) {
-      const data = {
-        id: features[key].id,
-        name: features[key].text,
-        coordinate: features[key].center,
-        location: features[key].place_name,
-      };
-
-      locations.push(data);
-    }
-
-    return locations;
-  }
-
-  function geocoder() {
-    geocodingClient
-      .forwardGeocode({
-        query: props.keyword,
-        countries: ['np'],
-      })
-      .send()
-      .then(response => {
-        const match = response.body;
-
-        setResponse(parseResponse(match));
-      }),
-      error => {
-        const match = error.body;
-
-        console.log('error:', match);
-      };
-  }
-
-  function handleBackButton() {
-    props.setIsSearching(false);
-    // to blur the InutText
-    Keyboard.dismiss();
-    return true;
-  }
+  const {response} = useSearch(props);
 
   function renderSearchResults() {
     let last = false;
@@ -99,29 +45,10 @@ function SearchList(props) {
     }
   }
 
-  useEffect(() => {
-    if (props.keyword !== '') {
-      geocoder();
-    }
-
-    BackHandler.addEventListener('hardwareBackPress', handleBackButton);
-
-    return () => {
-      BackHandler.removeEventListener('hardwareBackPress', handleBackButton);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.keyword]);
-
   return (
     <View style={styles.container}>
       <ScrollView keyboardShouldPersistTaps="always">
         {renderSearchResults()}
-
-        {/* <View style={styles.searchResultGroup}>
-          <View style={styles.blockContainer}>
-            <Text style={styles.blockText}>Choose on map</Text>
-          </View>
-        </View> */}
       </ScrollView>
     </View>
   );
