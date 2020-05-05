@@ -1,11 +1,52 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import Map from '../components/Map';
+import React, {useState} from 'react';
+import {
+  View,
+  Image,
+  Keyboard,
+  StyleSheet,
+  TouchableNativeFeedback,
+} from 'react-native';
 
-function MapScreen({navigation}) {
+// components
+import Map from '../components/Map';
+import SearchBox from '../components/SearchBox';
+import SearchList from '../components/SearchList';
+
+// assets
+import back from '../assets/Back.png';
+
+function MapScreen(props) {
+  const [keyword, setKeyword] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
+  const [destination, setDestination] = useState(null);
+
   return (
     <View style={styles.container}>
-      <Map userInfo={navigation.getParam('userInfo')} />
+      <View style={styles.searchArea}>
+        {isSearching && (
+          <TouchableNativeFeedback
+            onPress={() => {
+              setIsSearching(false);
+              Keyboard.dismiss();
+            }}>
+            <Image source={back} style={styles.backIcon} />
+          </TouchableNativeFeedback>
+        )}
+        <SearchBox setIsSearching={setIsSearching} setKeyword={setKeyword} />
+      </View>
+
+      {isSearching ? (
+        <SearchList
+          keyword={keyword}
+          setIsSearching={setIsSearching}
+          setDestination={setDestination}
+        />
+      ) : (
+        <Map
+          userInfo={props.navigation.getParam('userInfo')}
+          destination={destination}
+        />
+      )}
     </View>
   );
 }
@@ -16,9 +57,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'stretch',
   },
-  text: {
-    fontSize: 20,
-    textAlign: 'center',
+  searchArea: {
+    height: 65,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomWidth: 2,
+  },
+  backIcon: {
+    width: 30,
+    height: 30,
+    marginLeft: 5,
   },
 });
 
