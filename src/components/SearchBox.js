@@ -1,14 +1,32 @@
 import React, {useState} from 'react';
-import {View, TextInput, StyleSheet} from 'react-native';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
+
+// components
+import Avatar from '../components/Avatar';
+
+// assets
+import Menu from '../assets/menu.png';
 
 function SearchBox(props) {
   const [keyword, setKeyword] = useState('');
 
   return (
     <View style={styles.container}>
+      {!props.isSearching ? (
+        <TouchableOpacity>
+          <Image style={styles.menuIcon} source={Menu} />
+        </TouchableOpacity>
+      ) : null}
+
       <TextInput
         style={styles.inputBox}
-        placeholder="Search for..."
+        placeholder="Search here"
         value={keyword}
         returnKeyType="search"
         onChangeText={text => setKeyword(text)}
@@ -16,6 +34,8 @@ function SearchBox(props) {
         onSubmitEditing={() => props.setKeyword(keyword)}
         // onBlur={() => props.setIsSearching(false)}
       />
+
+      <Avatar />
     </View>
   );
 }
@@ -34,9 +54,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingVertical: 5,
     paddingHorizontal: 20,
-    borderWidth: 2,
-    borderRadius: 20,
-    borderColor: 'gray',
+    borderWidth: 0,
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    color: '#ffffff',
+  },
+  menuIcon: {
+    height: 26,
+    width: 33,
+    marginRight: 15,
   },
 });
 
