@@ -7,12 +7,18 @@ function Map(props) {
 
   return (
     <View style={styles.container}>
-      <Text>{props.userInfo}</Text>
-      {/* <MapboxGL.MapView styleURL={MapboxGL.StyleURL.Street}></MapboxGL.MapView> */}
       <MapboxGL.MapView
+        // A size must be provided to the MapboxGL.MapView through styles
         style={styles.container}
-        styleURL={MapboxGL.StyleURL.Street}
-      />
+        styleURL={MapboxGL.StyleURL.Outdoors}>
+        <MapboxGL.UserLocation visible />
+
+        <MapboxGL.Camera
+          zoomLevel={14}
+          followUserLocation
+          followUserMode={MapboxGL.UserTrackingModes.FollowWithCourse}
+        />
+      </MapboxGL.MapView>
     </View>
   );
 }
