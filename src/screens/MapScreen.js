@@ -13,7 +13,7 @@ import SearchBox from '../components/SearchBox';
 import SearchList from '../components/SearchList';
 
 // assets
-import back from '../assets/back_icon_b.png';
+import back from '../assets/back_icon.png';
 
 function MapScreen(props) {
   const [keyword, setKeyword] = useState('');
@@ -32,7 +32,11 @@ function MapScreen(props) {
             <Image source={back} style={styles.backIcon} />
           </TouchableNativeFeedback>
         )}
-        <SearchBox setIsSearching={setIsSearching} setKeyword={setKeyword} />
+        <SearchBox
+          isSearching={isSearching}
+          setIsSearching={setIsSearching}
+          setKeyword={setKeyword}
+        />
       </View>
 
       {isSearching ? (
@@ -56,13 +60,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'stretch',
+    backgroundColor: '#E34227',
   },
   searchArea: {
-    height: 65,
+    height: 75,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    borderBottomWidth: 2,
+    padding: 3,
   },
   backIcon: {
     width: 30,
