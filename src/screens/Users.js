@@ -22,7 +22,7 @@ const Users = () => {
       {users ? (
         <FlatList
           data={users}
-          renderItem={({item}) => <Text>{item.name}</Text>}
+          renderItem={({item}) => <Text>{item.contact}</Text>}
           keyExtractor={item => item.name}
         />
       ) : (
