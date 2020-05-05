@@ -13,7 +13,7 @@ import SearchBox from '../components/SearchBox';
 import SearchList from '../components/SearchList';
 
 // assets
-import back from '../assets/Back.png';
+import back from '../assets/back_icon_b.png';
 
 function MapScreen(props) {
   const [keyword, setKeyword] = useState('');
