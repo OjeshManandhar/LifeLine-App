@@ -15,6 +15,11 @@ import Button from '../components/Button';
 // hooks
 import useLogin from '../hooks/useLogin';
 
+// assets
+import logo from '../assets/logo.png';
+import phone from '../assets/Phone.png';
+import lock from '../assets/Lock.png';
+
 const Login = ({navigation}) => {
   const {name, setName, pass, setPass, handleLogin} = useLogin(navigation);
 
@@ -25,23 +30,23 @@ const Login = ({navigation}) => {
         source={require('../assets/Back.png')}>
         <View style={styles.header}>
           <Text style={styles.title}>LifeLine - Driver</Text>
-          <Image style={styles.logo} source={require('../assets/logo.png')} />
+          <Image style={styles.logo} source={logo} />
           <View style={styles.shadow} />
         </View>
         <View style={styles.content}>
           <View style={styles.textInput}>
-            <Image style={styles.icon} source={require('../assets/Mail.png')} />
+            <Image style={styles.icon} source={phone} />
             <TextInput
-              placeholder="Name"
+              placeholder="Contact"
               style={styles.holder}
               autoCapitalize="none"
-              autoCompleteType="name"
+              autoCompleteType="tel"
               value={name}
               onChange={e => setName(e.nativeEvent.text)}
             />
           </View>
           <View style={styles.textInput}>
-            <Image style={styles.icon} source={require('../assets/Lock.png')} />
+            <Image style={styles.icon} source={lock} />
             <TextInput
               secureTextEntry
               placeholder="Password"
@@ -114,6 +119,8 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   icon: {
+    width: 20,
+    height: 20,
     marginLeft: 10,
   },
   button: {
