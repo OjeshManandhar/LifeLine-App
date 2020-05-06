@@ -2,16 +2,13 @@ import React from 'react';
 import {Dialog, Button, Portal, Paragraph} from 'react-native-paper';
 import {StyleSheet} from 'react-native';
 
-const Alert = ({visible, setVisible}) => {
+const Alert = ({visible, setVisible, title, detail}) => {
   return (
     <Portal>
       <Dialog visible={visible} onDismiss={() => setVisible(false)}>
-        <Dialog.Title style={styles.title}>Signup ?</Dialog.Title>
+        <Dialog.Title style={styles.title}>{title}</Dialog.Title>
         <Dialog.Content>
-          <Paragraph>
-            Please contact the admin to register you to the App.
-          </Paragraph>
-          <Paragraph>Thank You!</Paragraph>
+          <Paragraph>{detail}</Paragraph>
         </Dialog.Content>
         <Dialog.Actions>
           <Button onPress={() => setVisible(false)}>Cancel</Button>
