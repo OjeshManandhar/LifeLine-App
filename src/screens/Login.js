@@ -1,70 +1,87 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
   StyleSheet,
   Image,
-  TextInput,
   ImageBackground,
+  TouchableOpacity,
   Dimensions,
+  KeyboardAvoidingView,
 } from 'react-native';
+
+import {TextInput} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 // component
 import Button from '../components/Button';
+import Alert from '../components/Alert';
 
 // hooks
 import useLogin from '../hooks/useLogin';
 
 // assets
 import logo from '../assets/logo.png';
-import phone from '../assets/Phone.png';
-import lock from '../assets/Lock.png';
 
 const Login = ({navigation}) => {
   const {name, setName, pass, setPass, handleLogin} = useLogin(navigation);
+  const [shift, setShift] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        style={styles.background}
-        source={require('../assets/Back.png')}>
-        <View style={styles.header}>
-          <Text style={styles.title}>LifeLine - Driver</Text>
-          <Image style={styles.logo} source={logo} />
-          <View style={styles.shadow} />
-        </View>
-        <View style={styles.content}>
-          <View style={styles.textInput}>
-            <Image style={styles.icon} source={phone} />
-            <TextInput
-              placeholder="Contact"
-              style={styles.holder}
-              autoCapitalize="none"
-              autoCompleteType="tel"
-              value={name}
-              onChange={e => setName(e.nativeEvent.text)}
-            />
+    <KeyboardAvoidingView
+      behavior="position"
+      style={styles.container}
+      enabled={shift}>
+      <View>
+        <ImageBackground
+          style={styles.background}
+          source={require('../assets/Back.png')}>
+          <View style={styles.header}>
+            <Text style={styles.title}>LifeLine - Driver</Text>
+            <Image style={styles.logo} source={logo} />
+            <View style={styles.shadow} />
           </View>
-          <View style={styles.textInput}>
-            <Image style={styles.icon} source={lock} />
-            <TextInput
-              secureTextEntry
-              placeholder="Password"
-              style={styles.holder}
-              value={pass}
-              onChange={e => setPass(e.nativeEvent.text)}
-              autoCapitalize="none"
-            />
+          <View style={styles.content}>
+            <View style={styles.textInput}>
+              <Icon name="md-call" size={32} color="#ff3a3a" />
+              <TextInput
+                label="Contact"
+                mode="outlined"
+                style={styles.holder}
+                selectionColor="red"
+                underlineColor="red"
+                value={name}
+                onFocus={() => setShift(false)}
+                onChange={e => setName(e.nativeEvent.text)}
+              />
+            </View>
+            <View style={styles.textInput}>
+              <Icon name="ios-unlock" size={32} color="#ff3a3a" />
+              <TextInput
+                secureTextEntry
+                label="Password"
+                mode="outlined"
+                style={styles.holder}
+                value={pass}
+                onFocus={() => setShift(true)}
+                onChange={e => setPass(e.nativeEvent.text)}
+              />
+            </View>
+            <View style={styles.button}>
+              <Button onPress={handleLogin} title="Login" />
+            </View>
+            <View style={styles.fotter}>
+              <Text style={styles.text}>Don't have an account? </Text>
+              <TouchableOpacity onPress={() => setVisible(true)}>
+                <Text>Signup</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View style={styles.button}>
-            <Button onPress={handleLogin} title="Login" />
-          </View>
-          <View style={styles.fotter}>
-            <Text style={styles.text}>Don't have an account? </Text>
-          </View>
-        </View>
-      </ImageBackground>
-    </View>
+        </ImageBackground>
+      </View>
+      <Alert visible={visible} setVisible={setVisible} />
+    </KeyboardAvoidingView>
   );
 };
 
@@ -105,11 +122,8 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   textInput: {
-    marginTop: 25,
+    marginTop: 0,
     marginBottom: 5,
-    borderWidth: 1.5,
-    borderColor: '#707070',
-    borderRadius: 11,
     flexDirection: 'row',
     alignItems: 'center',
   },
