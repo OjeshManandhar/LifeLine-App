@@ -1,19 +1,13 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Image,
-  Keyboard,
-  StyleSheet,
-  TouchableNativeFeedback,
-} from 'react-native';
+import {View, Keyboard, StyleSheet, TouchableOpacity} from 'react-native';
+
+// icons
+import Icon from 'react-native-vector-icons/Ionicons';
 
 // components
 import Map from '../components/Map';
 import SearchBox from '../components/SearchBox';
 import SearchList from '../components/SearchList';
-
-// assets
-import back from '../assets/back_icon.png';
 
 function MapScreen(props) {
   const [keyword, setKeyword] = useState('');
@@ -24,13 +18,18 @@ function MapScreen(props) {
     <View style={styles.container}>
       <View style={styles.searchArea}>
         {isSearching && (
-          <TouchableNativeFeedback
+          <TouchableOpacity
             onPress={() => {
               setIsSearching(false);
               Keyboard.dismiss();
             }}>
-            <Image source={back} style={styles.backIcon} />
-          </TouchableNativeFeedback>
+            <Icon
+              style={styles.backIcon}
+              name="ios-arrow-back"
+              size={50}
+              color="#fff"
+            />
+          </TouchableOpacity>
         )}
         <SearchBox
           isSearching={isSearching}
@@ -70,9 +69,7 @@ const styles = StyleSheet.create({
     padding: 3,
   },
   backIcon: {
-    width: 30,
-    height: 30,
-    marginLeft: 5,
+    marginHorizontal: 10,
   },
 });
 
