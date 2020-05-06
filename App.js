@@ -2,6 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import 'react-native-gesture-handler';
 import MapboxGL from '@react-native-mapbox-gl/maps';
+import {Provider} from 'react-native-paper';
 
 // Package
 import {createAppContainer} from 'react-navigation';
@@ -38,7 +39,9 @@ const AppContainer = createAppContainer(AppNavigator);
 function App() {
   return (
     <View style={styles.container}>
-      <AppContainer />
+      <Provider>
+        <AppContainer />
+      </Provider>
     </View>
   );
 }
