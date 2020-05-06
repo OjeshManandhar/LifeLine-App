@@ -13,6 +13,9 @@ import {
 import {TextInput} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+// const
+import {LoginText} from '../const';
+
 // component
 import Button from '../components/Button';
 import Alert from '../components/Alert';
@@ -24,9 +27,21 @@ import useLogin from '../hooks/useLogin';
 import logo from '../assets/logo.png';
 
 const Login = ({navigation}) => {
-  const {name, setName, pass, setPass, handleLogin} = useLogin(navigation);
+  const {
+    name,
+    setName,
+    pass,
+    setPass,
+    visible,
+    setVisible,
+    title,
+    setTitle,
+    detail,
+    setDetail,
+    disable,
+    handleLogin,
+  } = useLogin(navigation);
   const [shift, setShift] = useState(false);
-  const [visible, setVisible] = useState(false);
 
   return (
     <KeyboardAvoidingView
@@ -49,8 +64,6 @@ const Login = ({navigation}) => {
                 label="Contact"
                 mode="outlined"
                 style={styles.holder}
-                selectionColor="red"
-                underlineColor="red"
                 value={name}
                 onFocus={() => setShift(false)}
                 onChange={e => setName(e.nativeEvent.text)}
@@ -69,18 +82,28 @@ const Login = ({navigation}) => {
               />
             </View>
             <View style={styles.button}>
-              <Button onPress={handleLogin} title="Login" />
+              <Button onPress={handleLogin} title="Login" disable={disable} />
             </View>
             <View style={styles.fotter}>
               <Text style={styles.text}>Don't have an account? </Text>
-              <TouchableOpacity onPress={() => setVisible(true)}>
-                <Text>Signup</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setVisible(true);
+                  setTitle(LoginText.Signup.title);
+                  setDetail(LoginText.Signup.detail);
+                }}>
+                <Text style={styles.link}>Signup</Text>
               </TouchableOpacity>
             </View>
           </View>
         </ImageBackground>
       </View>
-      <Alert visible={visible} setVisible={setVisible} />
+      <Alert
+        visible={visible}
+        setVisible={setVisible}
+        title={title}
+        detail={detail}
+      />
     </KeyboardAvoidingView>
   );
 };
@@ -146,5 +169,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
+  },
+  link: {
+    color: '#ff3a3a',
   },
 });
