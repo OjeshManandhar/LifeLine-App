@@ -7,11 +7,15 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import useDriverData from '../hooks/useDriverData';
 
+import UserProfile from '../components/UserProfile';
+
 import {Ip} from '../const/ip';
 
 function SearchBox(props) {
   const [keyword, setKeyword] = useState('');
-  const {userInfo} = useDriverData('9808111222');
+  const {userInfo, userContact} = useDriverData('9808111222');
+  const [visible, setVisible] = useState(false);
+  const imgUrl = Ip.driver_pic + userContact;
 
   function renderAvatar(pic) {
     if (pic === null || !pic) {
@@ -20,7 +24,7 @@ function SearchBox(props) {
       return (
         <Avatar.Image
           source={{
-            uri: Ip.driver_pic + userInfo.contact,
+            uri: imgUrl,
           }}
           size={45}
         />
@@ -46,13 +50,21 @@ function SearchBox(props) {
         onFocus={() => props.setIsSearching(true)}
         onSubmitEditing={() => props.setKeyword(keyword)}
       />
-      <TouchableOpacity style={styles.avatar}>
+      <TouchableOpacity style={styles.avatar} onPress={() => setVisible(true)}>
         {userInfo ? (
           renderAvatar(userInfo.pic_location)
         ) : (
           <Avatar.Text label="U" size={45} style={styles.dummy} />
         )}
       </TouchableOpacity>
+      {userInfo ? (
+        <UserProfile
+          visible={visible}
+          setVisible={setVisible}
+          data={userInfo}
+          imgUrl={imgUrl}
+        />
+      ) : null}
     </View>
   );
 }

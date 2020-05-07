@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const useDriverData = contact => {
   const [userInfo, setInfo] = useState();
+  const userContact = contact;
   // const contact = navigation.getParam('userContact');
   const url = Ip.driver + '/' + contact;
 
@@ -16,7 +17,7 @@ const useDriverData = contact => {
       .catch(e => console.log(e));
   }, [contact]);
 
-  return {userInfo};
+  return {userInfo, userContact};
 };
 
 export default useDriverData;

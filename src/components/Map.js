@@ -4,9 +4,8 @@ import {View, StyleSheet} from 'react-native';
 // packages
 import MapboxGL from '@react-native-mapbox-gl/maps';
 
-function Map({userInfo, destination}) {
-  console.log('userInfo:', JSON.parse(userInfo));
-  console.log('destination:', destination);
+function Map({destination}) {
+  // console.log('destination:', destination);
 
   function renderPointAnnotation() {
     return (
