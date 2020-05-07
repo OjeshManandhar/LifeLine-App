@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import 'react-native-gesture-handler';
 import MapboxGL from '@react-native-mapbox-gl/maps';
-import {DefaultTheme, Provider} from 'react-native-paper';
+import {DefaultTheme, Provider as ThemeProvider} from 'react-native-paper';
 
 // Package
 import {createAppContainer} from 'react-navigation';
@@ -37,7 +37,7 @@ const AppNavigator = createStackNavigator(
     Map: {screen: MapScreen},
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Home',
     defaultNavigationOptions: {
       headerShown: false,
     },
@@ -48,9 +48,9 @@ const AppContainer = createAppContainer(AppNavigator);
 function App() {
   return (
     <View style={styles.container}>
-      <Provider theme={theme}>
+      <ThemeProvider theme={theme}>
         <AppContainer />
-      </Provider>
+      </ThemeProvider>
     </View>
   );
 }
