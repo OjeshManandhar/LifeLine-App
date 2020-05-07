@@ -7,7 +7,7 @@ import {
   Dimensions,
 } from 'react-native';
 
-import {Portal} from 'react-native-paper';
+import {Portal, Surface} from 'react-native-paper';
 
 import useDriverData from '../hooks/useDriverData';
 
@@ -23,12 +23,11 @@ function MapScreen(props) {
   const [keyword, setKeyword] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [destination, setDestination] = useState(null);
-  const {userInfo} = useDriverData('9808111222');
 
   return (
     <View style={styles.container}>
       <Portal>
-        <View style={styles.searchArea}>
+        <Surface style={styles.searchArea}>
           {isSearching && (
             <TouchableOpacity
               onPress={() => {
@@ -48,7 +47,7 @@ function MapScreen(props) {
             setIsSearching={setIsSearching}
             setKeyword={setKeyword}
           />
-        </View>
+        </Surface>
       </Portal>
 
       {isSearching ? (
@@ -82,8 +81,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 3,
+    padding: 8,
     borderRadius: 22,
+    elevation: 7,
   },
   backIcon: {
     marginHorizontal: 10,
