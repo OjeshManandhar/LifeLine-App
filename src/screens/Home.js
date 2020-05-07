@@ -2,11 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
 
 function Home({navigation}) {
-  const userInfo = {
-    userId: 'lorem',
-    userName: 'DeadSkull',
-    phone: '1234567890',
-  };
+  const contact = navigation.getParam('userContact');
 
   return (
     <View style={styles.container}>
@@ -24,7 +20,7 @@ function Home({navigation}) {
         title="Go to Map"
         onPress={() =>
           navigation.navigate('Map', {
-            userInfo: JSON.stringify(userInfo),
+            contact: {contact},
           })
         }
       />
