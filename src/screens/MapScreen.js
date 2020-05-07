@@ -1,5 +1,15 @@
 import React, {useState} from 'react';
-import {View, Keyboard, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Keyboard,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
+
+import {Portal} from 'react-native-paper';
+
+import useDriverData from '../hooks/useDriverData';
 
 // icons
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -13,30 +23,33 @@ function MapScreen(props) {
   const [keyword, setKeyword] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [destination, setDestination] = useState(null);
+  const {userInfo} = useDriverData('9808111222');
 
   return (
     <View style={styles.container}>
-      <View style={styles.searchArea}>
-        {isSearching && (
-          <TouchableOpacity
-            onPress={() => {
-              setIsSearching(false);
-              Keyboard.dismiss();
-            }}>
-            <Icon
-              style={styles.backIcon}
-              name="ios-arrow-back"
-              size={50}
-              color="#fff"
-            />
-          </TouchableOpacity>
-        )}
-        <SearchBox
-          isSearching={isSearching}
-          setIsSearching={setIsSearching}
-          setKeyword={setKeyword}
-        />
-      </View>
+      <Portal>
+        <View style={styles.searchArea}>
+          {isSearching && (
+            <TouchableOpacity
+              onPress={() => {
+                setIsSearching(false);
+                Keyboard.dismiss();
+              }}>
+              <Icon
+                style={styles.backIcon}
+                name="ios-arrow-back"
+                size={50}
+                color="#fff"
+              />
+            </TouchableOpacity>
+          )}
+          <SearchBox
+            isSearching={isSearching}
+            setIsSearching={setIsSearching}
+            setKeyword={setKeyword}
+          />
+        </View>
+      </Portal>
 
       {isSearching ? (
         <SearchList
@@ -59,14 +72,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'stretch',
-    backgroundColor: '#E34227',
   },
   searchArea: {
     height: 75,
+    width: Dimensions.get('window').width - 18,
+    backgroundColor: '#E34227',
+    marginHorizontal: 8,
+    marginTop: 8,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 3,
+    borderRadius: 22,
   },
   backIcon: {
     marginHorizontal: 10,
