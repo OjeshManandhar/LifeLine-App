@@ -40,15 +40,15 @@ const useLogin = navigation => {
           .then(function(response) {
             setToken(response.data);
             console.log(token);
-            navigation.navigate('Home');
+            navigation.navigate('Home', {userContact: name});
           })
           .catch(function(error) {
             console.log(error);
             setVisible(true);
             setTitle(LoginText.Server.title);
             setDetail(LoginText.Server.detail2);
+            throw 'error';
           });
-        throw 'error';
       } catch (error) {
         console.log('error caught: ', error);
         setVisible(true);
