@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#e5e5e5',
   },
   searchResultGroup: {
-    margin: 10,
+    marginHorizontal: 10,
+    marginTop: 90,
     padding: 2,
     borderWidth: 2,
     borderRadius: 5,
