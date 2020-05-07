@@ -14,8 +14,7 @@ function SearchBox(props) {
   const {userInfo} = useDriverData('9808111222');
 
   function renderAvatar(pic) {
-    console.log(pic);
-    if (pic === null) {
+    if (pic === null || !pic) {
       return <Avatar.Text label="U" size={45} style={styles.dummy} />;
     } else {
       return (
@@ -48,7 +47,11 @@ function SearchBox(props) {
         onSubmitEditing={() => props.setKeyword(keyword)}
       />
       <TouchableOpacity style={styles.avatar}>
-        {renderAvatar(userInfo.pic_location)}
+        {userInfo ? (
+          renderAvatar(userInfo.pic_location)
+        ) : (
+          <Avatar.Text label="U" size={45} style={styles.dummy} />
+        )}
       </TouchableOpacity>
     </View>
   );
