@@ -17,7 +17,6 @@ function SearchBox(props) {
   const [visible, setVisible] = useState(false);
   const imgUrl = Ip.driver_pic + userContact;
 
-  console.log(userInfo);
   function renderAvatar(pic) {
     if (pic === null || !pic) {
       return <Avatar.Text label="U" size={45} style={styles.dummy} />;
