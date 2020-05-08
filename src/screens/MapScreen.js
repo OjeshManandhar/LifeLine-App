@@ -18,6 +18,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Map from '../components/Map';
 import SearchBox from '../components/SearchBox';
 import SearchList from '../components/SearchList';
+import FloatAction from '../components/FloatAction';
 
 function MapScreen(props) {
   const [keyword, setKeyword] = useState('');
@@ -62,6 +63,8 @@ function MapScreen(props) {
           destination={destination}
         />
       )}
+
+      <FloatAction />
     </View>
   );
 }
