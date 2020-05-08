@@ -17,6 +17,7 @@ function SearchBox(props) {
   const [visible, setVisible] = useState(false);
   const imgUrl = Ip.driver_pic + userContact;
 
+  console.log(userInfo);
   function renderAvatar(pic) {
     if (pic === null || !pic) {
       return <Avatar.Text label="U" size={45} style={styles.dummy} />;
@@ -35,9 +36,9 @@ function SearchBox(props) {
   return (
     <View style={styles.container}>
       {!props.isSearching ? (
-        <TouchableOpacity style={styles.menuIcon}>
-          <Icon name="md-menu" size={45} color="#fff" />
-        </TouchableOpacity>
+        <View style={styles.menuIcon}>
+          <Icon name="ios-search" size={45} color="#fff" />
+        </View>
       ) : null}
 
       <TextInput
