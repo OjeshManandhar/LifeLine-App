@@ -5,24 +5,24 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 const FloatAction = () => {
   return (
-    <ActionButton buttonColor="rgba(231,76,60,1)" position="right">
+    <ActionButton
+      buttonColor="rgba(231,76,60,1)"
+      position="right"
+      shadowStyle={styles.shadow}>
       <ActionButton.Item
-        buttonColor="#9b59b6"
-        title="New Task"
-        onPress={() => console.log('notes tapped!')}>
-        <Icon name="md-create" style={styles.actionButtonIcon} />
+        buttonColor="#ff3a3a"
+        title="Obstructions"
+        onPress={() => console.log('obstruc tapped!')}>
+        <Icon name="ios-construct" style={styles.actionButtonIcon} />
       </ActionButton.Item>
-      <ActionButton.Item
-        buttonColor="#3498db"
-        title="Notifications"
-        onPress={() => {}}>
-        <Icon name="md-notifications-off" style={styles.actionButtonIcon} />
+      <ActionButton.Item buttonColor="#3498db" title="GPS" onPress={() => {}}>
+        <Icon name="ios-pin" style={styles.actionButtonIcon} />
       </ActionButton.Item>
       <ActionButton.Item
         buttonColor="#1abc9c"
-        title="All Tasks"
+        title="Navigate"
         onPress={() => {}}>
-        <Icon name="md-done-all" style={styles.actionButtonIcon} />
+        <Icon name="md-navigate" style={styles.actionButtonIcon} />
       </ActionButton.Item>
     </ActionButton>
   );
@@ -30,9 +30,13 @@ const FloatAction = () => {
 
 const styles = StyleSheet.create({
   actionButtonIcon: {
-    fontSize: 20,
-    height: 22,
+    fontSize: 24,
+    height: 26,
     color: 'white',
+  },
+  shadow: {
+    borderRadius: 28,
+    elevation: 9,
   },
 });
 
