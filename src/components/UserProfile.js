@@ -10,6 +10,9 @@ import {
 import {StyleSheet} from 'react-native';
 
 const UserProfile = ({visible, setVisible, data, imgUrl}) => {
+  if (!data) {
+    return null;
+  }
   return (
     <Portal>
       <Dialog visible={visible} onDismiss={() => setVisible(false)}>
