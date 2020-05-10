@@ -3,8 +3,6 @@ import {View, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 
 import {Avatar} from 'react-native-paper';
 
-import Icon from 'react-native-vector-icons/Ionicons';
-
 import useDriverData from '../hooks/useDriverData';
 
 import UserProfile from '../components/UserProfile';
@@ -13,7 +11,7 @@ import {Ip} from '../const/ip';
 
 function SearchBox(props) {
   const [keyword, setKeyword] = useState('');
-  const {userInfo, userContact} = useDriverData('9808111222');
+  const {userInfo, userContact} = useDriverData('9808901349');
   const [visible, setVisible] = useState(false);
   const imgUrl = Ip.driver_pic + userContact;
 
@@ -34,12 +32,6 @@ function SearchBox(props) {
 
   return (
     <View style={styles.container}>
-      {!props.isSearching ? (
-        <View style={styles.menuIcon}>
-          <Icon name="ios-search" size={45} color="#fff" />
-        </View>
-      ) : null}
-
       <TextInput
         style={styles.inputBox}
         placeholder="Search here"
