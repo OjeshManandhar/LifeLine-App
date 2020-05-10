@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
   },
   searchArea: {
-    height: 75,
+    height: 65,
     width: Dimensions.get('window').width - 18,
     backgroundColor: '#E34227',
     marginHorizontal: 8,
