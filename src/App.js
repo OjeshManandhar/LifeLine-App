@@ -2,8 +2,8 @@ import React from 'react';
 import Map from './screens/Map';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
@@ -11,24 +11,24 @@ const App = () => (
   <NavigationContainer>
     <Stack.Navigator>
       <Stack.Screen
-        name="login"
+        name='login'
         component={Login}
         options={{
-          headerShown: false,
+          headerShown: false
         }}
       />
       <Stack.Screen
-        name="signup"
+        name='signup'
         component={Signup}
         options={{
-          headerShown: false,
+          headerShown: false
         }}
       />
       <Stack.Screen
-        name="home"
+        name='home'
         component={Map}
         options={{
-          title: 'Map',
+          title: 'Map'
         }}
       />
     </Stack.Navigator>
