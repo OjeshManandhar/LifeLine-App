@@ -1,23 +1,37 @@
-import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+import React from 'react';
+import Map from './src/screens/Map';
 import Login from './src/screens/Login';
 import Signup from './src/screens/Signup';
-import Map from './src/screens/Map';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
-const MainNavigator = createStackNavigator(
-  {
-    Login: {screen: Login},
-    Signup: {screen: Signup},
-    Home: {screen: Map},
-  },
-  {
-    headerMode: 'none',
-    navigationOptions: {
-      headerVisible: false,
-    },
-  },
+const Stack = createStackNavigator();
+
+const App = () => (
+  <NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="login"
+        component={Login}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="signup"
+        component={Signup}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="home"
+        component={Map}
+        options={{
+          title: 'Map',
+        }}
+      />
+    </Stack.Navigator>
+  </NavigationContainer>
 );
-
-const App = createAppContainer(MainNavigator);
-
 export default App;

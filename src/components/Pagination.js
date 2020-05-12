@@ -1,44 +1,44 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
-export default class Pagination extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <View
-          style={[
-            styles.circle,
-            this.props.id === 1 ? styles.circleR : styles.circleG,
-          ]}
-        />
-        <View
-          style={[
-            styles.circle,
-            this.props.id === 2 ? styles.circleR : styles.circleG,
-          ]}
-        />
-        <View
-          style={[
-            styles.circle,
-            this.props.id === 3 ? styles.circleR : styles.circleG,
-          ]}
-        />
-        <View
-          style={[
-            styles.circle,
-            this.props.id === 4 ? styles.circleR : styles.circleG,
-          ]}
-        />
-        <View
-          style={[
-            styles.circle,
-            this.props.id === 5 ? styles.circleR : styles.circleG,
-          ]}
-        />
-      </View>
-    );
-  }
-}
+const Pagination = props => {
+  return (
+    <View style={styles.container}>
+      <View
+        style={[
+          styles.circle,
+          props.id === 1 ? styles.circleR : styles.circleG,
+        ]}
+      />
+      <View
+        style={[
+          styles.circle,
+          props.id === 2 ? styles.circleR : styles.circleG,
+        ]}
+      />
+      <View
+        style={[
+          styles.circle,
+          props.id === 3 ? styles.circleR : styles.circleG,
+        ]}
+      />
+      <View
+        style={[
+          styles.circle,
+          props.id === 4 ? styles.circleR : styles.circleG,
+        ]}
+      />
+      <View
+        style={[
+          styles.circle,
+          props.id === 5 ? styles.circleR : styles.circleG,
+        ]}
+      />
+    </View>
+  );
+};
+
+export default Pagination;
 
 const styles = StyleSheet.create({
   container: {
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     height: 10,
     borderRadius: 10 / 2,
     margin: 18,
-    marginTop: 40,
+    marginTop: 5,
   },
   circleG: {
     backgroundColor: 'grey',

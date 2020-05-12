@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -7,46 +7,32 @@ import {
   Image,
   TextInput,
 } from 'react-native';
-import Button from './Button';
 import Pagination from './Pagination';
 
-export default class Form extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      contact: '',
-      driverid: '',
-      username: '',
-      errorMessage: null,
-    };
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.text}>{this.props.title}</Text>
-        <View style={styles.body}>
-          <Image style={styles.image} source={require('../assets/dummy.png')} />
-          <Text style={styles.text}>
-            Please give us your {this.props.text2}
-          </Text>
-          <View style={styles.textInput}>
-            <TextInput
-              placeholder={this.props.placeholder}
-              style={styles.holder}
-              autoCapitalize="none"
-              value={this.state.value}
-            />
-          </View>
-          <Button onPress={this.props.scroll}>Next</Button>
-          <Pagination id={this.props.id} />
+const Form = props => {
+  return (
+    <View style={styles.container} key={props.id}>
+      <Text style={styles.text}>{props.title}</Text>
+      <View style={styles.body}>
+        <Image style={styles.image} source={require('../assets/dummy.png')} />
+        <Text style={styles.text}>Please give us your {props.text2}</Text>
+        <View style={styles.textInput}>
+          <TextInput
+            placeholder={props.placeholder}
+            style={styles.holder}
+            autoCapitalize="none"
+            value={props.state}
+            onChange={e => props.setState(e.nativeEvent.text)}
+          />
         </View>
+        {/* <Button onPress={() => console.log(props.value)}>Next</Button> */}
+        <Pagination id={props.id} />
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
+
+export default Form;
 
 const styles = StyleSheet.create({
   container: {
