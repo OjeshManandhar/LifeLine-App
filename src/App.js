@@ -9,11 +9,11 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 // Screens
-import Users from './src/screens/Users';
-import Login from './src/screens/Login';
-import Home from './src/screens/Home';
-import Detail from './src/screens/Detail';
-import MapScreen from './src/screens/MapScreen';
+import Users from './screens/Users';
+import Login from './screens/Login';
+import Home from './screens/Home';
+import Detail from './screens/Detail';
+import MapScreen from './screens/MapScreen';
 
 import { MAPBOX_API_KEY } from 'react-native-dotenv';
 
