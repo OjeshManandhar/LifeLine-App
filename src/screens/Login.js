@@ -4,97 +4,107 @@ import {
   Text,
   StyleSheet,
   Image,
-  TextInput,
-  TouchableOpacity,
   ImageBackground,
+  TouchableOpacity,
   Dimensions,
+  KeyboardAvoidingView,
 } from 'react-native';
 
-// package
-import axios from 'axios';
+import {TextInput} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-//const
-import {Ip} from '../const/ip';
+// const
+import {LoginText} from '../const';
 
 // component
 import Button from '../components/Button';
+import Alert from '../components/Alert';
+
+// hooks
+import useLogin from '../hooks/useLogin';
+
+// assets
+import logo from '../assets/logo.png';
 
 const Login = ({navigation}) => {
-  const [name, setName] = useState('');
-  const [pass, setPass] = useState('');
-  const [token, setToken] = useState('');
-
-  function handleLogin() {
-    var session_url = Ip.driver_login;
-    var uname = name;
-    var password = pass;
-    axios
-      .post(
-        session_url,
-        {},
-        {
-          auth: {
-            username: uname,
-            password: password,
-          },
-        },
-      )
-      .then(function(response) {
-        setToken(response.data);
-        console.log(token);
-        navigation.navigate('home', {name: 'home'});
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  }
+  const {
+    name,
+    setName,
+    pass,
+    setPass,
+    visible,
+    setVisible,
+    title,
+    setTitle,
+    detail,
+    setDetail,
+    disable,
+    handleLogin,
+  } = useLogin(navigation);
+  const [shift, setShift] = useState(false);
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        style={styles.background}
-        source={require('../assets/Back.png')}>
-        <View style={styles.header}>
-          <Text style={styles.title}>LifeLine - Driver</Text>
-          <Image style={styles.logo} source={require('../assets/logo.png')} />
-          <View style={styles.shadow} />
-        </View>
-        <View style={styles.content}>
-          <View style={styles.textInput}>
-            <Image style={styles.icon} source={require('../assets/Mail.png')} />
-            <TextInput
-              placeholder="name"
-              style={styles.holder}
-              autoCapitalize="none"
-              autoCompleteType="name"
-              value={name}
-              onChange={e => setName(e.nativeEvent.text)}
-            />
+    <KeyboardAvoidingView
+      behavior="position"
+      style={styles.container}
+      enabled={shift}>
+      <View>
+        <ImageBackground
+          style={styles.background}
+          source={require('../assets/Back.png')}>
+          <View style={styles.header}>
+            <Text style={styles.title}>LifeLine - Driver</Text>
+            <Image style={styles.logo} source={logo} />
+            <View style={styles.shadow} />
           </View>
-          <View style={styles.textInput}>
-            <Image style={styles.icon} source={require('../assets/Lock.png')} />
-            <TextInput
-              secureTextEntry
-              placeholder="Password"
-              style={styles.holder}
-              value={pass}
-              onChange={e => setPass(e.nativeEvent.text)}
-              autoCapitalize="none"
-            />
+          <View style={styles.content}>
+            <View style={styles.textInput}>
+              <Icon name="md-call" size={32} color="#ff3a3a" />
+              <TextInput
+                label="Contact"
+                mode="outlined"
+                style={styles.holder}
+                value={name}
+                onFocus={() => setShift(false)}
+                onChange={e => setName(e.nativeEvent.text)}
+              />
+            </View>
+            <View style={styles.textInput}>
+              <Icon name="ios-unlock" size={32} color="#ff3a3a" />
+              <TextInput
+                secureTextEntry
+                label="Password"
+                mode="outlined"
+                style={styles.holder}
+                value={pass}
+                onFocus={() => setShift(true)}
+                onChange={e => setPass(e.nativeEvent.text)}
+              />
+            </View>
+            <View style={styles.button}>
+              <Button onPress={handleLogin} title="Login" disable={disable} />
+            </View>
+            <View style={styles.fotter}>
+              <Text style={styles.text}>Don't have an account? </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setVisible(true);
+                  setTitle(LoginText.Signup.title);
+                  setDetail(LoginText.Signup.detail);
+                }}>
+                <Text style={styles.link}>Signup</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View style={styles.button}>
-            <Button onPress={() => handleLogin()}>Log In</Button>
-          </View>
-          <View style={styles.fotter}>
-            <Text style={styles.text}>Don't have an account? </Text>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('signup', {name: 'signup'})}>
-              <Text style={[styles.text, styles.link]}>Sign Up</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </ImageBackground>
-    </View>
+        </ImageBackground>
+      </View>
+      <Alert
+        visible={visible}
+        setVisible={setVisible}
+        title={title}
+        detail={detail}
+      />
+    </KeyboardAvoidingView>
   );
 };
 
@@ -135,11 +145,8 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   textInput: {
-    marginTop: 25,
+    marginTop: 0,
     marginBottom: 5,
-    borderWidth: 1.5,
-    borderColor: '#707070',
-    borderRadius: 11,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -149,6 +156,8 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   icon: {
+    width: 20,
+    height: 20,
     marginLeft: 10,
   },
   button: {
@@ -162,6 +171,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   link: {
-    color: '#FF3A3A',
+    color: '#ff3a3a',
   },
 });
